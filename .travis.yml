@@ -1,0 +1,10 @@
+language: node_js
+node_js:
+  - 12
+install:
+  - cd ./js
+  - npm install coveralls --save-dev
+  - npm i -d
+script:
+  - cd ./js
+  - npm run coverall

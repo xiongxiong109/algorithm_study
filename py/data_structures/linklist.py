@@ -7,7 +7,7 @@ class Linklist():
         # 创建一个头节点
         self.head = ListNode()
     # 在指定的item后面插入item
-    def insert(self, newItem, item = None):
+    def insert(self, newItem, item = 'head'):
         # 找到目标元素
         pre_item = self.find(item)
         # 创建新的节点，并且目标元素的指针指向新的节点
@@ -35,5 +35,6 @@ class Linklist():
 # 每一个节点拥有next的指针
 class ListNode(object):
     def __init__(self, item = 'head'):
+        print(item)
         self.item = item
         self.next = None

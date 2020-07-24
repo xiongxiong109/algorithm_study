@@ -11,7 +11,7 @@ class TestLinkList(unittest.TestCase):
     def test_insert(self):
         li = Linklist()
         # 按序插入
-        li.insert('hello', 'head')
+        li.insert('hello')
         li.insert('world', 'hello')
         # 在指定元素后面插入
         li.insert('xiong', 'world')

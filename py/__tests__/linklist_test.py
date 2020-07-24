@@ -36,3 +36,6 @@ class TestLinkList(unittest.TestCase):
         # remove
         li.remove('bear')
         self.assertEqual(li.toArr(), ['xiong', 'xxxx', 'asas'])
+        # remove last one
+        li.remove('asas')
+        self.assertEqual(li.toArr(), ['xiong', 'xxxx'])

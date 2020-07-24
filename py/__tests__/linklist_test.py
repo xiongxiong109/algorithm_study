@@ -15,4 +15,24 @@ class TestLinkList(unittest.TestCase):
         li.insert('world', 'hello')
         # 在指定元素后面插入
         li.insert('xiong', 'world')
-        self.assertEqual(li.toArr(), ['hello', 'world', 'xiong'])
+        li.insert('box', 'hello')
+        self.assertEqual(li.toArr(), ['hello', 'box', 'world', 'xiong'])
+    # 查找前一个节点测试
+    def test_find_prev(self):
+        li = Linklist()
+        li.insert('aaa')
+        li.insert('bbb')
+        self.assertEqual(li.toArr(), ['bbb', 'aaa'])
+        prev_a = li.find_prev('aaa')
+        self.assertEqual(prev_a.item, 'bbb')
+    # 删除节点测试
+    def test_remove(self):
+        li = Linklist()
+        li.insert('xiong')
+        li.insert('bear', 'xiong')
+        li.insert('xxxx', 'xiong')
+        li.insert('asas', 'bear')
+        self.assertEqual(li.toArr(), ['xiong', 'xxxx', 'bear', 'asas'])
+        # remove
+        li.remove('bear')
+        self.assertEqual(li.toArr(), ['xiong', 'xxxx', 'asas'])

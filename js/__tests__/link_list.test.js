@@ -12,7 +12,7 @@ describe('链表结构测试', () => {
         li = new LinkList()
     })
 
-    it.skip('插入节点测试', () => {
+    it('插入节点测试', () => {
         li.insert('hello');
         li.insert('world');
         li.insert('bear', 'hello'); // 在hello 后插入 bear

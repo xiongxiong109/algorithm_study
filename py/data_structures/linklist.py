@@ -27,7 +27,6 @@ class Linklist():
         prev_item = self.find_prev(item)
         # prev_item.next = item.next item只是目标元素，不是节点
         prev_item.next = prev_item.next.next
-        item = None
     # 找到当前目标节点的上一个界限
     def find_prev(self, item):
         cur_item = self.head

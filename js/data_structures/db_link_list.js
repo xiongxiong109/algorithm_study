@@ -8,14 +8,27 @@ class DBLinkList extends LinkList {
     }
     insert(newItem, item = 'head') {
         const curNode = this.find(item);
-        newItem.next = curNode.next;
-        newItem.prev = curNode;
-        curNode.next = newItem;
+        const newNode = new this.LinkNode(newItem);
+        /**
+         * head -> preNode -> curNode -> nextNode
+         * head -> preNode -> curNode -> newNode -> nextNode
+         */
+        newNode.next = curNode.next;
+        newNode.prev = curNode;
+        curNode.next = newNode;
     }
     remove(item) {
         const curNode = this.find(item);
         if (curNode.next != null) {
-            // todo
+            /**
+             * preNode -> curNode -> nextNode -> nextNextNode
+             * preNode -> nextNode -> nextNextNode
+             */
+            curNode.prev.next = curNode.next
+            curNode.next.prev = curNode.prev
+            // gc ?
+            curNode.next = null
+            curNode.prev = null
         }
     }
 }

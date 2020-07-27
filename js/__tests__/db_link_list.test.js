@@ -15,6 +15,13 @@ describe('双向链表测试', () => {
     })
 
     it('remove', () => {
-
+        li.insert('hello');
+        li.insert('world', 'hello'); // 默认头部插入暂时有点问题
+        li.insert('bear', 'hello')
+        expect(li.toArr()).toEqual(['hello', 'bear', 'world'])
+        li.remove('bear');
+        expect(li.head.next.item).toEqual('hello')
+        expect(li.toArr()).toEqual(['hello', 'world'])
     })
+
 })

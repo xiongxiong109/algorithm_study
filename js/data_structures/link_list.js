@@ -2,13 +2,14 @@
 
 class LinkList {
     // 初始化头节点
-    constructor() {
-        this.head = new LinkNode();
+    constructor(props = {}) {
+        this.LinkNode = props.LinkNode || LinkNode;
+        this.head = new this.LinkNode();
     }
     // 插入节点
     insert(newItem, item = 'head') {
         const preNode = this.find(item)
-        const nextNode = new LinkNode(newItem)
+        const nextNode = new this.LinkNode(newItem)
         // 节点引用继承
         nextNode.next = preNode.next;
         preNode.next = nextNode;

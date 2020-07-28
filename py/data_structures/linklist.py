@@ -4,15 +4,16 @@
 
 # 单向链表
 class Linklist():
-    def __init__(self):
+    def __init__(self, Node = None):
+        self.ListNode = Node or ListNode
         # 创建一个头节点
-        self.head = ListNode()
+        self.head = self.ListNode()
     # 在指定的item后面插入item
     def insert(self, newItem, item = 'head'):
         # 找到目标元素
         pre_item = self.find(item)
         # 创建新的节点，并且目标元素的指针指向新的节点
-        next_item = ListNode(newItem)
+        next_item = self.ListNode(newItem)
         next_item.next = pre_item.next
         pre_item.next = next_item
     # 查找指定节点

@@ -8,37 +8,39 @@
 from queue import Queue
 from math import floor
 
-def radix(args = []):
+
+def radix(args=[]):
     # 创建10个队列 bin0 - bin10
-    binArr = []
-    dataArr = []
+    bin_arr = []
+    data_arr = []
     for i in range(10):
-        binItem = {
+        bin_item = {
             'id': 'bin%s' % i,
             'queue': Queue()
         }
-        binArr.append(binItem)
+        bin_arr.append(bin_item)
     # 对数组中对个位数进行一次入队排序
     for item in args:
-        curItem = item % 10 # 取余数
-        curArr = binArr[curItem] # bin0, bin1
-        curArr['queue'].put(item)
+        cur_item = item % 10 # 取余数
+        cur_arr = bin_arr[cur_item] # bin0, bin1
+        cur_arr['queue'].put(item)
     # 第一次排序后依次出队，得到第一次排序的结果
-    dataArr = _popArr(binArr)
+    data_arr = pop_arr(bin_arr)
 
     # 对数组对十位数再进行一次入队排序
-    for item in dataArr:
-        curItem = floor(item / 10) # 取十位数
-        curArr = binArr[curItem] # bin0, bin1
-        curArr['queue'].put(item)
+    for item in data_arr:
+        cur_item = floor(item / 10) # 取十位数
+        cur_arr = bin_arr[cur_item] # bin0, bin1
+        cur_arr['queue'].put(item)
     
-    dataArr = _popArr(binArr)
+    data_arr = pop_arr(bin_arr)
 
-    return dataArr
+    return data_arr
 
-def _popArr(binArr = []):
-    singleArr = []
-    for bin_x in binArr:
+
+def pop_arr(bin_arr=[]):
+    single_arr = []
+    for bin_x in bin_arr:
         while bin_x['queue'].qsize():
-            singleArr.append(bin_x['queue'].get())
-    return singleArr
+            single_arr.append(bin_x['queue'].get())
+    return single_arr

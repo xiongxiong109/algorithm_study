@@ -1,5 +1,7 @@
-import unittest, queue
+import unittest
+import queue
 # python -m unittest que_test
+
 
 # 队列模块单元测试
 class TestQueue(unittest.TestCase):

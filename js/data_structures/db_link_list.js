@@ -13,6 +13,10 @@ class DBLinkList extends LinkList {
          * head -> preNode -> curNode -> nextNode
          * head -> preNode -> curNode -> newNode -> nextNode
          */
+        if (curNode.next) {
+            // 下一个的上一级索引也是需要修改的，不然任意插入会有问题
+            curNode.next.prev = newNode
+        }
         newNode.next = curNode.next;
         newNode.prev = curNode;
         curNode.next = newNode;
@@ -30,6 +34,24 @@ class DBLinkList extends LinkList {
             curNode.next = null
             curNode.prev = null
         }
+    }
+    // 查找最后一个元素
+    findLastOne() {
+        let curNode = this.head;
+        while(curNode.next) {
+            curNode = curNode.next
+        }
+        return curNode
+    }
+    // 倒序遍历
+    toReverseArr() {
+        let curNode = this.findLastOne();
+        const reverseArr = [];
+        while(curNode.prev) {
+            reverseArr.push(curNode.item)
+            curNode = curNode.prev;
+        }
+        return reverseArr
     }
 }
 

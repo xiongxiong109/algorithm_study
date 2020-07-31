@@ -27,6 +27,21 @@ class DBLinkList(LinkList):
         target_node.next = None
         target_node.prev = None
 
+    # 查找最后一个节点
+    def find_last_one(self):
+        cur_node = self.head
+        while cur_node.next is not None:
+            cur_node = cur_node.next
+        return cur_node
+
+    # 倒序输出
+    def to_reverse_arr(self):
+        cur_node = self.find_last_one()
+        arr = []
+        while cur_node.prev is not None:
+            arr.append(cur_node.item)
+            cur_node = cur_node.prev
+        return arr
 
 # 双向节点
 class Node(object):

@@ -20,3 +20,12 @@ class TestDbLinkList(unittest.TestCase):
         self.assertEqual(li.to_arr(), ['hello', 'bear', 'xiong'])
         li.remove('bear')
         self.assertEqual(li.to_arr(), ['hello', 'xiong'])
+
+    # 测试倒序方法
+    def test_reverse(self):
+        li = DBLinkList()
+        li.insert('hello')
+        li.insert('world')
+        li.insert('bear', 'hello')
+        self.assertSetEqual(li.to_arr(), ['world', 'hello', 'bear'])
+        self.assertSetEqual(li.to_reverse_arr(), ['bear', 'hello', 'world'])

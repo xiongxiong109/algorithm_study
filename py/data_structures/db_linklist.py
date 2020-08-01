@@ -13,6 +13,8 @@ class DBLinkList(LinkList):
     def insert(self, new_item, item='head'):
         cur_node = self.find(item)
         new_node = self.ListNode(new_item)
+        if cur_node.next is not None:
+            cur_node.next.prev = new_node
         new_node.next = cur_node.next
         new_node.prev = cur_node
         cur_node.next = new_node
@@ -42,6 +44,7 @@ class DBLinkList(LinkList):
             arr.append(cur_node.item)
             cur_node = cur_node.prev
         return arr
+
 
 # 双向节点
 class Node(object):

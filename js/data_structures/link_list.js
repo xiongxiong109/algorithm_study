@@ -6,7 +6,11 @@ class LinkList {
         this.LinkNode = props.LinkNode || LinkNode;
         this.head = new this.LinkNode();
     }
-    // 插入节点
+    /**
+     * 插入节点
+     * head -> curNode -> nextNode
+     * head -> curNode -> newNode -> nextNode
+     */
     insert(newItem, item = 'head') {
         const preNode = this.find(item)
         const nextNode = new this.LinkNode(newItem)

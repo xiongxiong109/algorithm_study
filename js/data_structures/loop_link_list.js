@@ -4,7 +4,23 @@ const LinkList = require('./link_list')
 class LoopLinkList extends LinkList {
     constructor() {
         super();
+        // 放置一个记录当前指针位置的索引
+        this.curNode = this.head
         this.head.next = this.head
+    }
+    // 从当前索引向后移动n个位置
+    move(n) {
+        for (let i = 0; i < n; i++) {
+            this.curNode = this.curNode.next
+        }
+    }
+    // 回到头部
+    moveToHead() {
+        this.curNode = this.head
+    }
+    // 展示当前指针位置
+    show() {
+        return this.curNode.item
     }
     toArr() {
         let curNode = this.head

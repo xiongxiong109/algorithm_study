@@ -12,6 +12,10 @@ class LoopLinkList extends LinkList {
     move(n) {
         for (let i = 0; i < n; i++) {
             this.curNode = this.curNode.next
+            // 跳过头节点
+            if(this.curNode.item == 'head' && this.curNode.next.item != 'head') {
+                this.curNode = this.curNode.next
+            }
         }
     }
     // 回到头部

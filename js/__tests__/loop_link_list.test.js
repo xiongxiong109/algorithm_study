@@ -26,5 +26,8 @@ describe('LoopLinkList', () => {
         li.remove('xiong')
         li.move(3)
         expect(li.show()).toEqual('hello')
+        // 测试循环遍历
+        li.move(5)
+        expect(li.show()).toEqual('world');
     })
 })

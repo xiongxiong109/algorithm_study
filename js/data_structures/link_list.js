@@ -21,7 +21,7 @@ class LinkList {
     // 查找节点
     find(item) {
         let curNode = this.head;
-        while(curNode.item != item) {
+        while(curNode.item != item && curNode.next && curNode.next.item != 'head') {
             curNode = curNode.next
         }
         return curNode

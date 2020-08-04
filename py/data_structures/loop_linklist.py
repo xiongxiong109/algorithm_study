@@ -26,9 +26,9 @@ class LoopLinkList(LinkList):
         while i < n:
             i += 1
             self.cur_node = self.cur_node.next
-        # 处理移动到头部后，自动走到下一位
-        if self.cur_node.item == 'head' and self.cur_node.next.item != 'head':
-            self.cur_node = self.cur_node.next
+            # 处理移动到头部后，自动走到下一位
+            if self.cur_node.item == 'head' and self.cur_node.next.item != 'head':
+                self.cur_node = self.cur_node.next
 
     # 回到头部
     def move_to_head(self):

@@ -17,3 +17,5 @@ nm_dir = dict(nm='xiong', age=27)
 # 对字典key进行排序后输出
 for item in sorted(nm_dir.keys()):
     print(nm_dir[item])
+
+# 字典的好处在于方便快速查找，但是是无序存储

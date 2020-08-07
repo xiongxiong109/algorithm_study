@@ -33,6 +33,10 @@ class DBLinkList extends LinkList {
             // gc ?
             curNode.next = null
             curNode.prev = null
+        } else {
+            curNode.prev.next = null
+            curNode.prev = null
+            // curNode = null
         }
     }
     // 查找最后一个元素

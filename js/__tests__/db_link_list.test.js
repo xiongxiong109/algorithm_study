@@ -24,6 +24,16 @@ describe('双向链表测试', () => {
         expect(li.toArr()).toEqual(['world', 'bear'])
     })
 
+    // 测试临界值删除情况
+    it('remove last one', () => {
+        li.insert('hello')
+        li.insert('world')
+        li.insert('bear', 'hello')
+        expect(li.toArr()).toEqual(['world', 'hello', 'bear'])
+        li.remove('bear')
+        expect(li.toArr()).toEqual(['world', 'hello'])
+    })
+
     it('reverse', () => {
         li.insert('hello');
         li.insert('world', 'hello')

@@ -5,6 +5,9 @@ const Dict = require('../data_structures/dictionary')
 function wordCounter(str = '') {
     const strArr = str.split(' ')
     const dict = new Dict();
+    if (!str) {
+        return dict.dump()
+    }
     for (let item of strArr) {
         item = item.replace(',', '').trim();
         const curDir = dict.get(item)

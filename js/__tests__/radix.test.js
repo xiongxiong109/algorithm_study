@@ -21,4 +21,8 @@ describe('基数排序算法测试', () => {
         const sortedArr = radixSort(arr);
         expect(sortedArr).toEqual([9, 90])
     })
+    test('函数默认值', () => {
+        const sortedArr = radixSort()
+        expect(sortedArr).toEqual([])
+    })
 })

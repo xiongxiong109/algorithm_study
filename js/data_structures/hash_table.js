@@ -30,3 +30,5 @@ class HashTable {
         return total % this.HASHKEY
     }
 }
+
+module.exports= HashTable

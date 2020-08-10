@@ -18,4 +18,14 @@ describe('HashTable', () => {
         expect(hashTable.get(worldKey)).toEqual('world')
     })
 
+    it('conflict', () => {
+        // 散列需要处理碰撞问题
+        const hashTable = new HashTable();
+        const helloKey = hashTable.put('hello')
+        const noHaKey = hashTable.put('lloeh')
+        expect(helloKey).toEqual(noHaKey)
+        expect(hashTable.table).not.toContain('hello')
+        expect(hashTable.table).toContain('lloeh')
+    })
+
 })

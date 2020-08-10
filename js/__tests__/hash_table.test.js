@@ -12,4 +12,10 @@ describe('HashTable', () => {
         expect(hashTable.table[121]).toEqual('hello')
     })
 
+    it('get', () => {
+        const hashTable = new HashTable();
+        const worldKey = hashTable.put('world');
+        expect(hashTable.get(worldKey)).toEqual('world')
+    })
+
 })

@@ -15,6 +15,11 @@ class HashTable {
         // 为什么要用数组来存储?
         // 这里如果不同的数据计算出相同的hashKey, 会产生碰撞
         this.table[hashKey] = data;
+        // 将hashKey返回， 便于查找
+        return hashKey
+    }
+    get(key) {
+        return this.table[key]
     }
     /**
      * 需要有一个hash算法, 可以计算出输入值对应的一个hash值

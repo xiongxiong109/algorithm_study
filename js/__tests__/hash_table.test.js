@@ -28,6 +28,7 @@ describe('HashTable', () => {
         expect(hashTable.table[helloKey]).toContain('hello')
         expect(hashTable.table[helloKey]).toContain('lloeh')
         expect(hashTable.table[otherKey]).toContain('bear')
+        // console.log(`${helloKey}: ${hashTable.table[helloKey]}`)
         // console.log(hashTable.table[helloKey])
         // console.log(hashTable.table[otherKey])
     })

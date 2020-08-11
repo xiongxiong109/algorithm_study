@@ -8,18 +8,35 @@ class HashTable {
     constructor() {
         // 出一个预算长度的数组, 讲数据均匀地填充到数组中
         this.table = new Array(this.HASHKEY);
+        this.buildChains();
+    }
+    // 开链, 避免元素碰撞
+    // (用队列的话是不是更好一点? 桶排序法)
+    // 队列是FIFO，没有直接访问特定元素的方法
+    buildChains() {
+        // 将table变成一个多维数组, 数组的每一个索引对应一个数组, 将产生碰撞的元素都存入同一个散列值的数组中
+        for (let i = 0; i < this.table.length; i++) {
+            this.table[i] = [];
+        }
     }
     // hash表中插入元素
     put(data) {
         const hashKey = this.hash(data)
-        // 为什么要用数组来存储?
-        // 这里如果不同的数据计算出相同的hashKey, 会产生碰撞
-        this.table[hashKey] = data;
+        let idx = 0;
+        if (!this.table[hashKey][idx]) {
+            this.table[hashKey][idx] = data;
+        } else {
+            while(this.table[hashKey][idx]) {
+                idx++;
+            }
+            this.table[hashKey][idx] = data;
+        }
         // 将hashKey返回， 便于查找
         return hashKey
     }
-    get(key) {
-        return this.table[key]
+    get(hashKey) {
+        const hashPos = this.table[hashKey];
+        return hashPos
     }
     /**
      * 需要有一个hash算法, 可以计算出输入值对应的一个hash值

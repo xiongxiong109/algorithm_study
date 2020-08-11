@@ -8,7 +8,7 @@ class HashTable:
         self.table = ['' for item in range(self.HASH_KEY)]
 
     def hash(self, data=''):
-        total = 0;
+        total = 0
         for char in data:
             total += ord(char)
         return total % self.HASH_KEY

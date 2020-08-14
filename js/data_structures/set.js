@@ -41,7 +41,4 @@ class PolySet {
 }
 
 // 原生Set
-module.exports = {
-    PolySet,
-    Set
-}
+module.exports = PolySet

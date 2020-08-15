@@ -8,6 +8,32 @@ describe('PolySet Test', () => {
         expect(uniqArr.list).toEqual([1, 34, 2, 5, 6])
         expect(uniqArr.size).toEqual(5)
     })
+    it('set empty', () => {
+        const arr = new PolySet()
+        expect(arr.list).toEqual([])
+    })
+    it('delete', () => {
+        const arr = new PolySet([1, 2, 3])
+        const isOK = arr.delete(2)
+        expect(arr.list).toEqual([1, 3])
+        expect(isOK).toBeTruthy()
+    })
+    it('delete not found', () => {
+        const arr = new PolySet([1, 2, 3])
+        const isOK = arr.delete(4)
+        expect(arr.list).toEqual([1, 2, 3])
+        expect(isOK).not.toBeTruthy()
+    })
+    it('has', () => {
+        const arr = new PolySet([1, 2, 3])
+        expect(arr.has(2)).toBeTruthy()
+        expect(arr.has(5)).not.toBeTruthy()
+    })
+    it('clear', () => {
+        const arr = new PolySet([1, 2, 3])
+        arr.clear()
+        expect(arr.list).toEqual([])
+    })
 })
 
 describe('Set Utils', () => {

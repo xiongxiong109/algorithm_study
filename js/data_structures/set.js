@@ -20,17 +20,18 @@ class PolySet {
         return this
     }
     delete(item) {
-        const idx = this.list.findIndex(item)
+        const idx = this.list.findIndex(listItem => listItem == item)
         if (idx >= 0) {
             this.list = [
                 ...this.list.slice(0, idx),
                 ...this.list.slice(idx +1, this.size)
             ]
+            return true
         }
         return false;
     }
     has(item) {
-        return this.list.findIndex(item) >= 0
+        return this.list.findIndex(listItem => listItem == item) >= 0
     }
     clear() {
         this.list = []

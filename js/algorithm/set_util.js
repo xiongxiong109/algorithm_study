@@ -35,6 +35,18 @@ function diffWith(argA = []) {
 // 判断是否是子集
 function isChildren(argA = [], argB = []) {
     // empty
+    if (argA.length >= argB.length) {
+        return false
+    }
+    const setB = new Set(argB);
+    const setA = new set(argA)
+    for (const item of setB.values()) {
+        // 如果A中存在B不存在的元素, 则不是子集
+        if (!setA.has(item)) {
+            return false
+        }
+        return true
+    }
 }
 
 module.exports = {

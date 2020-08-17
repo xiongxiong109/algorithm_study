@@ -1,6 +1,6 @@
 // set测试
 const PolySet = require('../data_structures/set')
-const { union, intersect } = require('../algorithm/set_util')
+const { union, intersect, diffWith } = require('../algorithm/set_util')
 
 describe('PolySet Test', () => {
     it('数组去重', () => {
@@ -46,6 +46,23 @@ describe('Set Utils', () => {
     it('测试交集方法', () => {
         const intersectArr = intersect([1, 2, 3], [2, 3, 4], [3, 4, 5])
         expect(intersectArr).toEqual([3])
+    })
+
+    it('测试补集方法', () => {
+        const argA = [1, 2, 4];
+        const argB = [1, 2, 3, 4, 5, 6];
+        const diffWithA = diffWith(argA);
+        expect(diffWithA(argB)).toEqual([3, 5, 6])
+    })
+
+    it('测试补集空集', () => {
+        const diffWithEmpty = diffWith()
+        expect(diffWithEmpty()).toEqual([])
+    })
+
+    it('测试补集非子集', () => {
+        const diffWithArr = diffWith([1, 4, '22'])
+        expect(diffWithArr([1, '1', '2', 'h'])).toEqual([])
     })
 
 })

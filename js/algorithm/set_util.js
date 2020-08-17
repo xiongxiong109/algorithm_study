@@ -7,7 +7,7 @@ function union(...args) {
     // 将set变回数组
     return [...set]
 }
-function _unionOne(argA = [], argB = []) {
+function _unionOne(argA, argB) {
     return new Set([...argA, ...argB])
 }
 
@@ -15,7 +15,7 @@ function _unionOne(argA = [], argB = []) {
 function intersect(...args) {
     return [...args.reduce(_intersectOne)]
 }
-function _intersectOne(argA = [], argB = []) {
+function _intersectOne(argA, argB) {
     const setA = new Set(argA)
     const setB = new Set(argB)
     return new Set([...setA].filter(item => setB.has(item)))
@@ -28,25 +28,35 @@ function _intersectOne(argA = [], argB = []) {
  */
 function diffWith(argA = []) {
     return function diff(argB = []) {
-        // empty
+        // 如果连子集都不是，return []
+        if (!isChildren(argA, argB)) {
+            return []
+        }
+        const setA = new Set(argA);
+        const diffArr = [...new Set(argB)].filter(item => !setA.has(item))
+        return diffArr
     }
 }
 
 // 判断是否是子集
-function isChildren(argA = [], argB = []) {
+function isChildren(argA, argB) {
     // empty
     if (argA.length >= argB.length) {
         return false
     }
     const setB = new Set(argB);
-    const setA = new set(argA)
-    for (const item of setB.values()) {
+    const setA = new Set(argA);
+
+    let isChild = true;
+    for (const item of setA.values()) {
         // 如果A中存在B不存在的元素, 则不是子集
-        if (!setA.has(item)) {
-            return false
+        if (!setB.has(item)) {
+            isChild = false;
+            return isChild;
         }
-        return true
     }
+
+    return isChild
 }
 
 module.exports = {

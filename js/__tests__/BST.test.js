@@ -21,8 +21,8 @@ describe('BST', () => {
          */
         const leftNode = bst.root.left;
         const rightNode = bst.root.right;
-        expect(leftNode.right.data).toEqual(4)
-        expect(rightNode.left.data).toEqual(13)
+        expect(leftNode.right.show()).toEqual(4)
+        expect(rightNode.left.show()).toEqual(13)
         expect(rightNode.right.data).toEqual(59)
     })
     it('中序遍历 method', () => {

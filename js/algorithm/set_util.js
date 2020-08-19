@@ -29,7 +29,7 @@ function _intersectOne(argA, argB) {
 function diffWith(argA = []) {
     return function diff(argB = []) {
         // 如果连子集都不是，return []
-        if (!isChildren(argA, argB)) {
+        if (!isSubset(argA, argB)) {
             return []
         }
         const setA = new Set(argA);
@@ -39,7 +39,7 @@ function diffWith(argA = []) {
 }
 
 // 判断是否是子集
-function isChildren(argA, argB) {
+function isSubset(argA, argB) {
     // empty
     if (argA.length >= argB.length) {
         return false

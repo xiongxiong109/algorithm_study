@@ -1,5 +1,9 @@
 # 二叉查找树
 class BST:
+
+    # 最终遍历之后展示的数组
+    order_list = []
+
     def __init__(self):
         # 根节点
         self.root = None
@@ -24,6 +28,13 @@ class BST:
                     if cur_node is None:
                         parent_node.right = insert_node
                         break
+
+    # 中序遍历
+    def mid_order(self, node):
+        if node is not None:
+            self.mid_order(node.left)
+            self.order_list.append(node.data)
+            self.mid_order(node.right)
 
 
 # 树节点

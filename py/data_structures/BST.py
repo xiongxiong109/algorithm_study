@@ -12,7 +12,7 @@ class BST:
     def insert(self, data):
         cur_node = self.root
         insert_node = BNode(data)
-        if cur_node.data is None:
+        if cur_node is None:
             self.root = insert_node
         else:
             # 遍历节点，将小的元素放到左边，大的放到右边

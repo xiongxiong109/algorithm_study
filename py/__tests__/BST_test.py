@@ -19,4 +19,10 @@ class TestBST(unittest.TestCase):
         self.assertEqual(tree.root.right.right.data, 65)
 
     def test_mid_order(self):
-        pass
+        tree = BST()
+        tree.insert(22)
+        tree.insert(33)
+        tree.insert(14)
+        tree.insert(65)
+        tree.mid_order(tree.root)
+        self.assertEqual(tree.order_list, [14, 22, 33, 65])

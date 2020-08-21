@@ -29,12 +29,29 @@ class BST:
                         parent_node.right = insert_node
                         break
 
+    # 先序遍历
+    def pre_order(self, node):
+        if node is not None:
+            self.order_list.append(node.data)
+            self.pre_order(node.left)
+            self.pre_order(node.right)
+
     # 中序遍历
     def mid_order(self, node):
+        # 遍历前重置元素序列
+        # if node == self.root:
+        #     self.order_list = []
         if node is not None:
             self.mid_order(node.left)
             self.order_list.append(node.data)
             self.mid_order(node.right)
+
+    # 后序遍历
+    def post_order(self, node):
+        if node is not None:
+            self.post_order(node.left)
+            self.post_order(node.right)
+            self.order_list.append(node.data)
 
 
 # 树节点

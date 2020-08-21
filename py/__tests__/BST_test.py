@@ -45,3 +45,15 @@ class TestBST(unittest.TestCase):
         tree = _create_tree()
         tree.post_order(tree.root)
         self.assertEqual(tree.order_list, [6, 18, 14, 65, 33, 22])
+
+    def test_find_min(self):
+        tree = _create_tree()
+        self.assertEqual(tree.find_min(), 6)
+        tree_only = BST()
+        # 考虑临界值情况
+        tree_only.insert(7)
+        self.assertEqual(tree_only.find_min(), 7)
+
+    def test_find_max(self):
+        tree = _create_tree()
+        self.assertEqual(tree.find_max(), 65)

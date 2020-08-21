@@ -2,11 +2,13 @@
 class BST:
 
     # 最终遍历之后展示的数组
-    order_list = []
+    # 这个玩意如果写在这里，每次计算都会保留上一次的结果
+    # order_list = []
 
     def __init__(self):
         # 根节点
         self.root = None
+        self.order_list = []
 
     # 插入节点
     def insert(self, data):
@@ -52,6 +54,20 @@ class BST:
             self.post_order(node.left)
             self.post_order(node.right)
             self.order_list.append(node.data)
+
+    # 查找最小值, 找到最左边的元素即可
+    def find_min(self):
+        node = self.root
+        while node.left:
+            node = node.left
+        return node.data
+
+    # 查找最大值, 返回最右侧的元素
+    def find_max(self):
+        node = self.root
+        while node.right:
+            node = node.right
+        return node.data
 
 
 # 树节点

@@ -48,6 +48,28 @@ class BST {
             this.midOrder(node.right)
         }
     }
+    /**
+     * 先序遍历
+     * 根 -> 左子树 -> 右子树
+     */
+    preOrder(node) {
+        if (node) {
+            this.dataList.push(node.data)
+            this.preOrder(node.left)
+            this.preOrder(node.right)
+        }
+    }
+    /**
+     * 后序遍历
+     * 左子树 -> 右子树 -> 根
+     */
+    postOrder(node) {
+        if (node) {
+            this.postOrder(node.left)
+            this.postOrder(node.right)
+            this.dataList.push(node.data)
+        }
+    }
     show() {
         return this.dataList
     }

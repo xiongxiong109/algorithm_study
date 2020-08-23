@@ -42,4 +42,7 @@ describe('BST', () => {
         bst.midOrder(bst.root)
         expect(bst.show()).toEqual([2, 7, 12, 13, 19, 55])
     })
+    it('先序遍历', () => {
+        
+    })
 })

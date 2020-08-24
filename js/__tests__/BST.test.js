@@ -63,4 +63,18 @@ describe('BST', () => {
         bst.postOrder(bst.root)
         expect(bst.show()).toEqual([7, 2, 12, 19, 55, 13])
     })
+    it('findMin', () => {
+        const bst = createTree();
+        expect(bst.findMin()).toEqual(2)
+    })
+    it('findMax', () => {
+        const bst = createTree()
+        expect(bst.findMax()).toEqual(55)
+    })
+    it('find', () => {
+        const bst = createTree();
+        expect(bst.find(32)).toBeFalsy();
+        expect(bst.find(13)).toBeTruthy();
+        expect(bst.find(19)).toBeTruthy();
+    })
 })

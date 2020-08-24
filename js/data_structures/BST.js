@@ -70,6 +70,38 @@ class BST {
             this.dataList.push(node.data)
         }
     }
+    // 查找最小值, 最左边节点
+    findMin() {
+        let curNode = this.root;
+        while(curNode.left) {
+            curNode = curNode.left
+        }
+        return curNode.data
+    }
+    // 查找最大值, 最右边节点
+    findMax() {
+        let curNode = this.root;
+        while(curNode.right) {
+            curNode = curNode.right
+        }
+        return curNode.data
+    }
+    // 查找特定的值
+    find(data) {
+        let curNode = this.root;
+        while (curNode) {
+            if (curNode.data == data) {
+                return true;
+            } else {
+                if (data < curNode.data) {
+                    curNode = curNode.left
+                } else {
+                    curNode = curNode.right
+                }
+            }
+        }
+        return false
+    }
     show() {
         return this.dataList
     }

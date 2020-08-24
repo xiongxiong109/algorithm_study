@@ -57,3 +57,10 @@ class TestBST(unittest.TestCase):
     def test_find_max(self):
         tree = _create_tree()
         self.assertEqual(tree.find_max(), 65)
+
+    def test_find(self):
+        tree = _create_tree()
+        self.assertFalse(tree.find(12))
+        self.assertTrue(tree.find(22))
+        self.assertTrue(tree.find(65))
+        self.assertTrue(tree.find(33))

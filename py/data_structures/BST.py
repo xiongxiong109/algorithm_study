@@ -69,6 +69,18 @@ class BST:
             node = node.right
         return node.data
 
+    # 查找元素
+    def find(self, data):
+        cur_node = self.root
+        while cur_node:
+            if cur_node.data == data:
+                return True
+            else:
+                if data < cur_node.data:
+                    cur_node = cur_node.left
+                else:
+                    cur_node = cur_node.right
+        return False
 
 # 树节点
 class BNode:

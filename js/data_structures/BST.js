@@ -78,6 +78,14 @@ class BST {
         }
         return curNode.data
     }
+    // 顺着当前node, 查找最小值的节点
+    findMinNode(node) {
+        let curNode = node;
+        while (curNode.left) {
+            curNode = curNode.left
+        }
+        return curNode
+    }
     // 查找最大值, 最右边节点
     findMax() {
         let curNode = this.root;
@@ -91,7 +99,7 @@ class BST {
         let curNode = this.root;
         while (curNode) {
             if (curNode.data == data) {
-                return true;
+                return curNode;
             } else {
                 if (data < curNode.data) {
                     curNode = curNode.left
@@ -100,7 +108,52 @@ class BST {
                 }
             }
         }
-        return false
+        return null
+    }
+    /**
+     * 二叉树删除节点操作
+     * 仍然使用递归进行,
+     * 1. 找到待删除节点
+     * 2. 判断待删除节点是否有子节点
+     * 3. 单个子节点时，挪上去
+     * 4. 两个子节点时，可选左边上去或者右边上去
+     */
+    remove(data) {
+        const root = this.removeNode(this.root, data)
+        return root
+    }
+    removeNode(node, data) {
+        if (!node) {
+            return null
+        }
+        // 找到该节点
+        if (node.data == data) {
+            // 没有子节点
+            if (!node.left && !node.right) {
+                return null
+            } else if (!node.left) { // 只有右节点
+                return node.right
+            } else if (!node.right) { // 只有左节点
+                return node.left
+            } else {
+                /**
+                 * 有两个节点
+                 * 找到最右边相对于需要删除的节点的最小值
+                 * 或者找到最左边相对于需要删除节点的最大值
+                 */
+                const temNode = this.findMinNode(node.right)
+                node.data = temNode.data;
+                node.right = this.removeNode(node.right, temNode.data)
+                return node
+
+            }
+        } else if (data < node.data) {
+            node.left = this.removeNode(node.left, data)
+            return node
+        } else {
+            node.right = this.removeNode(node.right, data)
+            return node
+        }
     }
     show() {
         return this.dataList

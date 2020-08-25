@@ -77,4 +77,62 @@ describe('BST', () => {
         expect(bst.find(13)).toBeTruthy();
         expect(bst.find(19)).toBeTruthy();
     })
+    /**
+     *       13
+     *   12       55
+     * 2        19
+     *   7     
+     */
+    it('remove, 没有找到对应元素', () => {
+        const bst = createTree();
+        bst.remove(33)
+        expect(bst.find(33)).toBeFalsy()
+    })
+    it('remove, 左侧单叶子节点', () => {
+        const bst = createTree();
+        expect(bst.find(12)).toBeTruthy()
+        bst.remove(12)
+        expect(bst.find(12)).toBeFalsy()
+        expect(bst.root.left.data).toEqual(2)
+        bst.midOrder(bst.root)
+        /**
+         *       13
+         *   2       55
+         *     7   19    
+         */
+        expect(bst.show()).toEqual([2, 7, 13, 19, 55])
+    })
+    /**
+     *       13
+     *   12       55
+     * 2        19
+     *   7 
+     *     8   
+     */
+    it('remove, 右侧子节点', () => {
+        const bst = createTree()
+        bst.insert(8)
+        bst.remove(7)
+        expect(bst.root.left.left.right.data).toEqual(8)
+    })
+    /**
+     *       13
+     *   12       55
+     * 2        19
+     *   7     
+     */
+    it('remove, 双叶子节点', () => {
+        const bst = createTree();
+        bst.insert(12.5)
+        /**
+         *          13
+         *    12                55
+         * 2     12.5        19
+         *   7  
+         */
+        bst.remove(12)
+        expect(bst.root.left.data).toEqual(12.5)
+        bst.midOrder(bst.root)
+        expect(bst.show()).toEqual([2, 7, 12.5, 13, 19, 55])
+    })
 })

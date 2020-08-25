@@ -81,6 +81,7 @@ class BST {
     // 顺着当前node, 查找最小值的节点
     findMinNode(node) {
         let curNode = node;
+        console.log(curNode)
         while (curNode.left) {
             curNode = curNode.left
         }

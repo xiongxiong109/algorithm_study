@@ -135,4 +135,20 @@ describe('BST', () => {
         bst.midOrder(bst.root)
         expect(bst.show()).toEqual([2, 7, 12.5, 13, 19, 55])
     })
+    it('remove, 嵌套子节点', () => {
+        const bst = createTree();
+        bst.insert(28)
+        bst.insert(27)
+        bst.insert(18.7)
+        /**
+         *       13
+         *   12                    55
+         * 2             19
+         *   7     18.7       28
+         *                27
+         */
+        bst.remove(19)
+        bst.midOrder(bst.root)
+        expect(bst.show()).toEqual([2, 7, 12, 13, 18.7, 27, 28, 55])
+    })
 })

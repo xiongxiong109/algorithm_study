@@ -1,4 +1,15 @@
 # 二叉查找树
+
+
+# 获取当前节点左子树中的最大值, 即访问最右侧节点
+def get_max_left(node):
+    cur_node = node
+    while cur_node:
+        if cur_node.right:
+            cur_node = cur_node.right
+    return cur_node
+
+
 class BST:
 
     # 最终遍历之后展示的数组
@@ -81,6 +92,49 @@ class BST:
                 else:
                     cur_node = cur_node.right
         return False
+
+    # 删除节点
+    def remove(self, data):
+        root = self.__remove_node(self.root, data)
+        return root
+
+    # 根据节点内容, 处理待删除子树剩余节点
+    def __remove_node(self, node, data):
+        if node is None:
+            return None
+        else:
+            # 当前节点是待删除节点
+            if node.data == data:
+                # 待删除节点没有子节点
+                if node.left is None and node.right is None:
+                    node = None
+                    return node
+                # 有左子树
+                elif node.left:
+                    node = node.left
+                    return node
+                # 有右子树
+                elif node.right:
+                    node = node.right
+                    return node
+                # 左右子树均存在
+                # 这里取左子树中的最大值替换原来的节点
+                # -- 另一种方案是取右子树中的最小值，已经在js版本中实现
+                else:
+                    tem_node = get_max_left(node)
+                    node.data = tem_node.data
+                    node.left = self.__remove_node(node.left, tem_node.data)
+                    return node
+
+            # 数据比当前节点小，向左递归
+            elif data < node.data:
+                node = self.__remove_node(node.left, data)
+                return node
+            # 数据比当前节点大，向右递归
+            else:
+                node = self.__remove_node(node.right, data)
+                return node
+
 
 # 树节点
 class BNode:

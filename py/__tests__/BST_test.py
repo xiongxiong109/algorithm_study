@@ -64,3 +64,16 @@ class TestBST(unittest.TestCase):
         self.assertTrue(tree.find(22))
         self.assertTrue(tree.find(65))
         self.assertTrue(tree.find(33))
+
+    #          22
+    #    14         33
+    # 6     18          65
+    def test_remove(self):
+        tree = _create_tree()
+        self.assertTrue(tree.find(14))
+        tree.remove(14)
+        self.assertFalse(tree.find(14))
+        self.assertEqual(tree.root.left.data, 6)
+        tree.mid_order(tree.root)
+        self.assertEqual(tree.order_list, [6, 18, 22, 33, 65])
+

@@ -4,9 +4,8 @@
 # 获取当前节点左子树中的最大值, 即访问最右侧节点
 def get_max_left(node):
     cur_node = node
-    while cur_node:
-        if cur_node.right:
-            cur_node = cur_node.right
+    while cur_node.right:
+        cur_node = cur_node.right
     return cur_node
 
 
@@ -107,21 +106,20 @@ class BST:
             if node.data == data:
                 # 待删除节点没有子节点
                 if node.left is None and node.right is None:
-                    node = None
-                    return node
-                # 有左子树
-                elif node.left:
-                    node = node.left
-                    return node
-                # 有右子树
-                elif node.right:
+                    return None
+                # 无左子树有右子树
+                elif node.left is None:
                     node = node.right
+                    return node
+                # 无右子树有左子树
+                elif node.right is None:
+                    node = node.left
                     return node
                 # 左右子树均存在
                 # 这里取左子树中的最大值替换原来的节点
                 # -- 另一种方案是取右子树中的最小值，已经在js版本中实现
                 else:
-                    tem_node = get_max_left(node)
+                    tem_node = get_max_left(node.left)
                     node.data = tem_node.data
                     node.left = self.__remove_node(node.left, tem_node.data)
                     return node

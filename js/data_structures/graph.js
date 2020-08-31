@@ -50,7 +50,7 @@ class Graph {
     }
     // 展示图
     showMap(i) {
-        if (idx) {
+        if (i >= 0) {
             return this.adj[i]
         }
         return this.adj

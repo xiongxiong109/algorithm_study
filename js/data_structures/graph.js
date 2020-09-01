@@ -48,6 +48,13 @@ class Graph {
         // 边数加1
         this.edges++;
     }
+    /**
+     * deep first search
+     * 深度优先搜索
+     */
+    dfs(v) {
+        
+    }
     // 展示图
     showMap(i) {
         if (i >= 0) {

@@ -69,7 +69,7 @@ class Graph {
                 this.dfs(curItem)
             }
         }
-        
+
     }
     /**
      * breadth first search
@@ -77,6 +77,14 @@ class Graph {
      */
     bfs(v) {
 
+    }
+    // 清空搜索列表
+    resetSearchList() {
+        this.searchedList = [];
+        // 重置访问记录
+        for (let i = 0; i < this.verticles; i++) {
+            this.visited[i] = false;
+        }
     }
     // 展示图
     showMap(i) {

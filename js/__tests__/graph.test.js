@@ -26,12 +26,12 @@ describe('Graph', () => {
 
     // 深度优先搜索
     it('test dfs', () => {
-        graph.searchedList = [];
+        graph.resetSearchList();
         // 从顶点0，只能遍历图的0, 3, 4顶点
         graph.dfs(0)
         expect(graph.searchedList).toEqual([0, 3, 4])
 
-        graph.searchedList = [];
+        graph.resetSearchList();
         // 打通1, 3之间的连线
         graph.addEdge(1, 3)
         /**

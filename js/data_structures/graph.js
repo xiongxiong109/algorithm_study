@@ -28,6 +28,9 @@ class Graph {
         this.verticles = verticles
         this.edges = 0
         this.adj = []
+        this.visited = []; // 存储已遍历的顶点数组
+        // 搜索遍历后的数组
+        this.searchedList = [];
         this.initAdjList()
     }
     // 初始化邻接列表 Adjacency List
@@ -37,6 +40,7 @@ class Graph {
          */
         for (let i = 0; i < this.verticles; i++) {
             this.adj[i] = [];
+            this.visited[i] = false;
         }
     }
     // 添加一条边(两点决定一条边)
@@ -50,10 +54,29 @@ class Graph {
     }
     /**
      * deep first search
-     * 深度优先搜索
+     * 深度优先搜索, 每遍历一个元素，都尽可能地把这个元素的索引都遍历完
      */
     dfs(v) {
+
+        this.visited[v] = true;
+        if (this.adj[v]) {
+            this.searchedList.push(v)
+        }
+
+        for (let i = 0; i < this.adj[v].length; i++) {
+            const curItem = this.adj[v][i];
+            if (!this.visited[curItem]) { // 该顶点没有被访问过
+                this.dfs(curItem)
+            }
+        }
         
+    }
+    /**
+     * breadth first search
+     * 广度优先搜索
+     */
+    bfs(v) {
+
     }
     // 展示图
     showMap(i) {

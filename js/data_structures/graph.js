@@ -5,6 +5,8 @@
  * 图的信息都在边上
  */
 
+const Queue = require('./queue')
+
 // 图的顶点
 class Vertex {
     constructor(label, isVisited = false) {
@@ -76,7 +78,31 @@ class Graph {
      * 广度优先搜索
      */
     bfs(v) {
+        // 能找到这个顶点
+        if (this.adj[v]) {
+            
+            /**
+             * 使用队列来实现，将已经访问过的顶点入队
+             * 最后全部出队即可
+            */
+            const vertexQueue = new Queue()
+            this.visited[v] = true;
+            vertexQueue.put(v);
 
+            while (vertexQueue.size()) {
+                // 队首元素出队
+                const vert = vertexQueue.get();
+                this.searchedList.push(vert);
+                // 开始访问这个顶点中所关联的其他顶点
+                for (const item of this.adj[vert]) {
+                    if (!this.visited[item]) {
+                        this.visited[item] = true;
+                        vertexQueue.put(item)
+                    }
+                }
+            }
+
+        }
     }
     // 清空搜索列表
     resetSearchList() {

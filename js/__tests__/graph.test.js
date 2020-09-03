@@ -44,5 +44,44 @@ describe('Graph', () => {
         graph.dfs(0)
         expect(graph.searchedList).toEqual([0, 3, 4, 1, 2])
 
+        const dfsG = new Graph(5)
+        dfsG.addEdge(0, 1)
+        dfsG.addEdge(0, 2)
+        dfsG.addEdge(1, 3)
+        dfsG.addEdge(2, 4)
+        /**
+         * 0 -> [1, 2]
+         * 1 -> [0, 3]
+         * 2 -> [0, 4]
+         * 3 -> [1]
+         * 4 -> [2]
+         */
+
+         dfsG.dfs(0)
+         expect(dfsG.searchedList).toEqual([0, 1, 3, 2, 4])
+
+    })
+
+    // 广度优先搜索
+    it('test bfs', () => {
+        graph.resetSearchList();
+        graph.bfs(0);
+        expect(graph.searchedList).toEqual([0, 3, 4])
+
+        const dfsG = new Graph(5)
+        dfsG.addEdge(0, 1)
+        dfsG.addEdge(0, 2)
+        dfsG.addEdge(1, 3)
+        dfsG.addEdge(2, 4)
+        /**
+         * 0 -> [1, 2]
+         * 1 -> [0, 3]
+         * 2 -> [0, 4]
+         * 3 -> [1]
+         * 4 -> [2]
+         */
+
+         dfsG.bfs(0)
+         expect(dfsG.searchedList).toEqual([0, 1, 2, 3, 4])
     })
 })

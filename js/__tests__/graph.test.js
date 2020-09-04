@@ -73,6 +73,7 @@ describe('Graph', () => {
         dfsG.addEdge(0, 2)
         dfsG.addEdge(1, 3)
         dfsG.addEdge(2, 4)
+
         /**
          * 0 -> [1, 2]
          * 1 -> [0, 3]
@@ -83,5 +84,44 @@ describe('Graph', () => {
 
          dfsG.bfs(0)
          expect(dfsG.searchedList).toEqual([0, 1, 2, 3, 4])
+        // [null, 0, 0, 1, 2]
+        //  console.log(dfsG.edgeTo)
+    })
+    it('pathTo', () => {
+        const dfsG = new Graph(5)
+        dfsG.addEdge(0, 1)
+        dfsG.addEdge(0, 2)
+        dfsG.addEdge(1, 3)
+        dfsG.addEdge(2, 4)
+        dfsG.addEdge(3, 4)
+        dfsG.addEdge(2, 3)
+        /**
+         * 0 -> [1, 2]
+         * 1 -> [0, 3]
+         * 2 -> [0, 4, 3]
+         * 3 -> [1, 4, 2]
+         * 4 -> [2, 3]
+         */
+
+        // 查找0 -> 4的最短路径
+        /**
+         * 从0 到4, 有
+         * 0 - 2 - 4
+         * 0 - 1 - 3 - 4
+         * 0 - 1 - 3 - 2 - 4
+         */
+        const shortPath = dfsG.pathTo(0, 4);
+        expect(shortPath).toEqual([0, 2, 4]);
+        /**
+         * 1 - 0 - 2 - 4
+         * 1 - 3 - 4
+         */
+        const shortPath2 = dfsG.pathTo(1, 4);
+        expect(shortPath2).toEqual([1, 3, 4])
+    })
+
+    // 路线无法抵达
+    it('unable pathTo', () => {
+        expect(graph.pathTo(1, 4)).toEqual(null)
     })
 })

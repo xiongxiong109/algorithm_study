@@ -8,12 +8,12 @@
 const Queue = require('./queue')
 
 // 图的顶点
-class Vertex {
-    constructor(label, isVisited = false) {
-        this.label = label
-        this.isVisited = isVisited
-    }
-}
+// class Vertex {
+//     constructor(label, isVisited = false) {
+//         this.label = label
+//         this.isVisited = isVisited
+//     }
+// }
 
 // 图
 class Graph {
@@ -31,6 +31,7 @@ class Graph {
         this.edges = 0
         this.adj = []
         this.visited = []; // 存储已遍历的顶点数组
+        this.edgeTo = []; // 从一个顶点到另一个顶点到边
         // 搜索遍历后的数组
         this.searchedList = [];
         this.initAdjList()
@@ -80,7 +81,6 @@ class Graph {
     bfs(v) {
         // 能找到这个顶点
         if (this.adj[v]) {
-            
             /**
              * 使用队列来实现，将已经访问过的顶点入队
              * 最后全部出队即可
@@ -88,7 +88,6 @@ class Graph {
             const vertexQueue = new Queue()
             this.visited[v] = true;
             vertexQueue.put(v);
-
             while (vertexQueue.size()) {
                 // 队首元素出队
                 const vert = vertexQueue.get();
@@ -97,12 +96,32 @@ class Graph {
                 for (const item of this.adj[vert]) {
                     if (!this.visited[item]) {
                         this.visited[item] = true;
+                        // 正在探索到顶点，添加一条边
+                        this.edgeTo[item] = vert;
                         vertexQueue.put(item)
                     }
                 }
             }
 
         }
+    }
+    // 从一个顶点到达某一个顶点的最短路径算法
+    pathTo(from, to) {
+
+        // 先对该顶点进行一次搜索遍历, 记录下所有对路径点
+        this.resetSearchList();
+        this.bfs(from);
+
+        const path = [];
+        // 是否有路径经过这个点
+        if (!this.visited[to]) {
+            return null;
+        }
+        for (let i = to; i != from; i = this.edgeTo[i]) {
+            path.unshift(i)
+        }
+        path.unshift(from)
+        return path
     }
     // 清空搜索列表
     resetSearchList() {

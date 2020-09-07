@@ -25,15 +25,15 @@ class Graph {
      * 3 -> [2]
      * 4 -> [2]
      */
-    constructor(verticles) {
+    constructor(verticles, vertexList = []) {
         // ?
         this.verticles = verticles
         this.edges = 0
         this.adj = []
         this.visited = []; // 存储已遍历的顶点数组
         this.edgeTo = []; // 从一个顶点到另一个顶点到边
-        // 搜索遍历后的数组
-        this.searchedList = [];
+        this.searchedList = []; // 搜索遍历后的数组
+        this.vertexList = vertexList; // 需要用来进行排序的集合
         this.initAdjList()
     }
     // 初始化邻接列表 Adjacency List
@@ -122,6 +122,23 @@ class Graph {
         }
         path.unshift(from)
         return path
+    }
+    /**
+     * 拓扑排序, 有先决条件
+     * 针对有向无环图实现拓扑排序
+     * 其目的是为了处理图里大小分支的优先级与顺序，
+     * 是一种非稳定性的排序，二级排序的顺序可以不是唯一的
+     * 从第n个顶点开始排序
+     */
+    topSort(n = 0) {
+        const stack = [];
+        // 重置访问节点信息
+        this.resetSearchList();
+        this.dfs(n);
+        this.searchedList.forEach(item => {
+            stack.push(this.vertexList[item])
+        })
+        return stack
     }
     // 清空搜索列表
     resetSearchList() {

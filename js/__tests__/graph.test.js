@@ -124,4 +124,25 @@ describe('Graph', () => {
     it('unable pathTo', () => {
         expect(graph.pathTo(1, 4)).toEqual(null)
     })
+
+    // 拓扑排序
+    it('topSort', () => {
+        const graph = new Graph(5, ['CSS3', 'HTML5', 'JS', 'Node', 'GraphQL'])
+        graph.addEdge(1, 0) // HTML5 -> CSS3
+        graph.addEdge(1, 2) // HTML5 -> JS
+        graph.addEdge(2, 3) // JS -> Node
+        graph.addEdge(2, 4) // JS -> GraphQL
+        /**
+         * 0 -> [1]
+         * 1 -> [0, 2]
+         * 2 -> [1, 3, 4]
+         * 3 -> [2]
+         * 4 -> [4]
+         * topSort: [HTML5, CSS3, JS, Node, GraphQL] or [HTML5, JS, CSS3, Node, GraphQL]
+         */
+        const stack = graph.topSort(1);
+        expect(stack).toEqual(['HTML5', 'CSS3', 'JS', 'Node', 'GraphQL'])
+        // graph.dfs(1)
+        // console.log(graph.searchedList)
+    })
 })

@@ -6,8 +6,8 @@ class Vertex {
         this.data = props.data; // 顶点数据
         this.id = props.id;
         this.isVisited = false; // 顶点是否被访问过
-        this.from = []; // 顶点的来源
-        this.to = []; // 顶点的下一个去处
+        this.from = []; // 顶点的来源, 即邻接列表
+        this.to = []; // 顶点的下一个去处, 即邻接列表
     }
 }
 

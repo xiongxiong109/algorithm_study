@@ -1,4 +1,6 @@
 # 图与图算法
+from queue import Queue
+
 
 # 图类, 使用邻接列表或者邻接矩阵存储
 # 使用邻接列表方式存储已经在js中实现，py中尝试使用邻接矩阵
@@ -52,6 +54,26 @@ class Graph:
             if item == 1 and not next_vertex.is_visited:
                 self.dfs(to_id)
         self.search_list.append(ver_id)
+
+    # 广度优先搜索
+    def bfs(self, ver_id):
+
+        cur_vertex = self.vertex["vertex%d" % ver_id]
+        if not cur_vertex.is_visited:
+
+            cur_vertex.is_visited = True
+            # 将元素入队
+            search_queue = Queue(maxsize=self.verticles)
+            search_queue.put(ver_id)
+
+            while search_queue.qsize():
+                cur_id = search_queue.get()
+                self.search_list.append(cur_id)
+                for to_id, item in enumerate(self.metrix[cur_id]):
+                    next_vertex = self.vertex["vertex%d" % to_id]
+                    if item == 1 and not next_vertex.is_visited:
+                        next_vertex.is_visited = True
+                        search_queue.put(to_id)
 
     def show_search_list(self):
         arr = []

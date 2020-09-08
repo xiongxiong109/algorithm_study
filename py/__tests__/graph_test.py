@@ -42,3 +42,22 @@ class TestGraph(unittest.TestCase):
         # 3 11001
         # 4 00010
         self.assertEqual(graph.show_search_list(), [0, 3, 4, 1, 2])
+
+    def test_bfs(self):
+        graph = create_graph()
+        graph.add_edge(0, 1)
+        graph.add_edge(0, 2)
+        graph.add_edge(1, 3)
+        graph.add_edge(2, 4)
+        #     0 1 2 3 4
+        # -------------
+        # 0 | 0 1 1 0 0
+        # 1 | 1 0 0 1 0
+        # 2 | 1 0 0 0 1
+        # 3 | 0 1 0 0 0
+        # 4 | 0 0 1 0 0
+
+        # print(graph.metrix)
+
+        graph.bfs(0)
+        self.assertEqual(graph.search_list, [0, 1, 2, 3, 4])

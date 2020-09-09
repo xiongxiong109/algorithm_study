@@ -67,7 +67,7 @@ class TestGraph(unittest.TestCase):
         graph.add_edge(0, 1)
         graph.add_edge(0, 2)
         graph.add_edge(1, 3)
-        graph.add_edge(2, 4)
+        # graph.add_edge(2, 4)
         graph.add_edge(3, 4)
         #     0 1 2 3 4
         # -------------
@@ -81,3 +81,16 @@ class TestGraph(unittest.TestCase):
         # 0 - 2 - 4
         stack = graph.short_path(0, 4)
         self.assertEqual(stack, [0, 2, 4])
+
+    def test_short_path2(self):
+        graph = create_graph()
+        graph.add_edge(0, 1)
+        # graph.add_edge(0, 2)
+        graph.add_edge(0, 3)
+        graph.add_edge(1, 3)
+        graph.add_edge(3, 4)
+        graph.add_edge(2, 4)
+        graph.add_edge(3, 2)
+        stack = graph.short_path(0, 4)
+        self.assertEqual(graph.edge_to, [None, 0, 3, 0, 3])
+        self.assertEqual(stack, [0, 3, 4])

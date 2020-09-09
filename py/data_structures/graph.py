@@ -39,6 +39,8 @@ class Graph:
     def reset_search_list(self):
         # 清空搜索数组
         self.search_list = []
+        # 边存储, 创建一个len x len的矩阵, 存储最大图到边
+        self.edge_to = [None for item in range(self.verticles)]
         # 重置is_visited
         for i in range(self.verticles):
             self.vertex["vertex%d" % i].is_visited = False

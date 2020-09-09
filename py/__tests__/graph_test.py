@@ -61,3 +61,23 @@ class TestGraph(unittest.TestCase):
 
         graph.bfs(0)
         self.assertEqual(graph.search_list, [0, 1, 2, 3, 4])
+
+    def test_short_path(self):
+        graph = create_graph()
+        graph.add_edge(0, 1)
+        graph.add_edge(0, 2)
+        graph.add_edge(1, 3)
+        graph.add_edge(2, 4)
+        graph.add_edge(3, 4)
+        #     0 1 2 3 4
+        # -------------
+        # 0 | 0 1 1 0 0
+        # 1 | 1 0 0 1 0
+        # 2 | 1 0 0 0 1
+        # 3 | 0 1 0 0 1
+        # 4 | 0 0 1 1 0
+        # 从0 到 4, 有
+        # 0 - 1 - 3 - 4
+        # 0 - 2 - 4
+        stack = graph.short_path(0, 4)
+        self.assertEqual(stack, [0, 2, 4])

@@ -9,6 +9,8 @@ class Graph:
         self.verticles = len(vertex_list) or 0
         self.metrix = []
         self.vertex = {}
+        # 边存储, 创建一个len x len的矩阵, 存储最大图到边
+        self.edge_to = [None for item in range(self.verticles)]
         # 搜索后的排序数组
         self.search_list = []
         self.init_metrix(vertex_list)
@@ -73,7 +75,29 @@ class Graph:
                     next_vertex = self.vertex["vertex%d" % to_id]
                     if item == 1 and not next_vertex.is_visited:
                         next_vertex.is_visited = True
+                        self.edge_to[to_id] = cur_id
                         search_queue.put(to_id)
+
+    # 最短路径
+    def short_path(self, from_id, to_id):
+        stack = []
+        self.reset_search_list()
+        # 先使用广度优先搜索，从该顶点走完全图
+        self.bfs(from_id)
+        # 遍历之后，先看看是否能走到to_id的点
+        to_vertex = self.vertex["vertex%d" % to_id]
+        if to_vertex and to_vertex.is_visited:
+            idx = to_id
+            while idx != from_id:
+                edge_id = self.edge_to[idx]
+                stack.append(idx)
+                idx = edge_id
+            stack.append(from_id)
+            stack.reverse()
+            return stack
+        # 没有找到对应点，或者没有经过目标点，说明无法到达
+        else:
+            return None
 
     def show_search_list(self):
         arr = []

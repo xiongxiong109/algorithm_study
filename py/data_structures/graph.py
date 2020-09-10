@@ -5,7 +5,9 @@ from queue import Queue
 # 图类, 使用邻接列表或者邻接矩阵存储
 # 使用邻接列表方式存储已经在js中实现，py中尝试使用邻接矩阵
 class Graph:
-    def __init__(self, vertex_list):
+    def __init__(self, vertex_list, is_direc=False):
+        # 是否是有向图
+        self.is_direc = is_direc
         self.verticles = len(vertex_list) or 0
         self.metrix = []
         self.vertex = {}
@@ -32,7 +34,8 @@ class Graph:
             self.metrix[from_id][to_id] = 1
             # self.vertex["vertex%d" % from_id].to_ids.append(to_id)
             # 如果是无向图, 可以同时给下面这段赋值
-            self.metrix[to_id][from_id] = 1
+            if not self.is_direc:
+                self.metrix[to_id][from_id] = 1
             # self.vertex["vertex%d" % to_id].from_ids.append(from_id)
 
     # 重置搜索遍历点
@@ -100,6 +103,28 @@ class Graph:
         # 没有找到对应点，或者没有经过目标点，说明无法到达
         else:
             return None
+
+    # 拓扑排序, 仅针对有向无环图
+    def top_sort(self):
+        top_vertex = self._find_top()
+        print(top_vertex)
+        print(top_vertex.data)
+
+    # 查找没有前驱节点的顶点
+    # 对邻接矩阵而言，即没有与矩阵中的任何顶点建立由其他顶点指向该顶点的单向的边
+    # 即任何一行ℹ中都不存在row[i][j] = 1的情况, 那j就是顶点
+    # 或者任何一列中, 也是可以的
+    def _find_top(self):
+        row_id = -1
+        for row in range(self.verticles):
+            col_arr = []
+            for col in range(self.verticles):
+                col_arr.append(self.metrix[col][row])
+            col_set = set(col_arr)
+            # 是一个全0的集合
+            if 1 not in col_set:
+                return self.vertex["vertex%d" % row]
+        return None
 
     def show_search_list(self):
         arr = []

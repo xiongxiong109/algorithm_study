@@ -2,8 +2,8 @@ import unittest
 from data_structures.graph import Graph
 
 
-def create_graph():
-    graph = Graph(['1', '2', '3', '4', '5'])
+def create_graph(is_direc=False):
+    graph = Graph(['计算机基础', '微机原理', '高等数学', '算法数据结构', 'C语言'], is_direc)
     return graph
 
 
@@ -94,3 +94,29 @@ class TestGraph(unittest.TestCase):
         stack = graph.short_path(0, 4)
         self.assertEqual(graph.edge_to, [None, 0, 3, 0, 3])
         self.assertEqual(stack, [0, 3, 4])
+
+    # 测试有向图
+    def test_direc(self):
+        graph = create_graph(True)
+        # 有向图，只建立单向箭头
+        graph.add_edge(0, 1)
+        self.assertEqual(graph.metrix[0][1], 1)
+        self.assertEqual(graph.metrix[1][0], 0)
+        graph.add_edge(1, 0)
+        self.assertEqual(graph.metrix[1][0], 1)
+
+    # 测试拓扑排序
+    def test_top_sort(self):
+        graph = create_graph(True)
+        graph.add_edge(2, 1)
+        graph.add_edge(2, 0)
+        graph.add_edge(1, 3)
+        graph.add_edge(1, 4)
+        #   01234
+        # 0 00000
+        # 1 00011
+        # 2 11000
+        # 3 00000
+        # 4 00000
+        stack = graph.top_sort()
+        # print(stack)

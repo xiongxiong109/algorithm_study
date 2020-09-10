@@ -9,12 +9,16 @@ class Graph:
         # 是否是有向图
         self.is_direc = is_direc
         self.verticles = len(vertex_list) or 0
+        # 邻接矩阵存储
         self.metrix = []
+        # 顶点存储
         self.vertex = {}
         # 边存储, 创建一个len x len的矩阵, 存储最大图到边
         self.edge_to = [None for item in range(self.verticles)]
         # 搜索后的排序数组
         self.search_list = []
+        # top排序的stack
+        self.top_stack = []
         self.init_metrix(vertex_list)
 
     # 初始化邻接矩阵
@@ -22,7 +26,7 @@ class Graph:
         for i in range(0, self.verticles):
             # 顺便将顶点初始化
             if vertex_list and vertex_list[i]:
-                vertex = Vertex(data=vertex_list[i])
+                vertex = Vertex(vet_id=i, data=vertex_list[i])
                 self.vertex["vertex%d" % i] = vertex
             self.metrix.append([])
             for j in range(0, self.verticles):
@@ -107,8 +111,23 @@ class Graph:
     # 拓扑排序, 仅针对有向无环图
     def top_sort(self):
         top_vertex = self._find_top()
-        print(top_vertex)
-        print(top_vertex.data)
+        self.top_stack = []
+        # 从顶点开始深度优先搜索
+        if top_vertex is not None:
+            self._loop_top(top_vertex.id)
+        return self.top_stack
+
+    # 对顶点元素进行遍历
+    def _loop_top(self, ver_id):
+        vertex = self.vertex["vertex%d" % ver_id]
+        if not vertex.is_visited:
+            vertex.is_visited = True
+            self.top_stack.append(vertex.data)
+
+        for idx, item in enumerate(self.metrix[ver_id]):
+            cur_vertex = self.vertex["vertex%d" % idx]
+            if item == 1 and not cur_vertex.is_visited:
+                self._loop_top(cur_vertex.id)
 
     # 查找没有前驱节点的顶点
     # 对邻接矩阵而言，即没有与矩阵中的任何顶点建立由其他顶点指向该顶点的单向的边
@@ -135,6 +154,7 @@ class Graph:
 
 # 顶点类
 class Vertex:
-    def __init__(self, data=''):
+    def __init__(self, data='', vet_id=0):
         self.is_visited = False
         self.data = data
+        self.id = vet_id

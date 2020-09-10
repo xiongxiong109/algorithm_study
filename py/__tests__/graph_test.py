@@ -108,6 +108,7 @@ class TestGraph(unittest.TestCase):
     # 测试拓扑排序
     def test_top_sort(self):
         graph = create_graph(True)
+        # '计算机基础', '微机原理', '高等数学', '算法数据结构', 'C语言'
         graph.add_edge(2, 1)
         graph.add_edge(2, 0)
         graph.add_edge(1, 3)
@@ -119,4 +120,10 @@ class TestGraph(unittest.TestCase):
         # 3 00000
         # 4 00000
         stack = graph.top_sort()
-        # print(stack)
+        self.assertEqual(stack[0], '高等数学')
+        # 按top分组
+        self.assertIn('微机原理', stack[1:3])
+        self.assertIn('计算机基础', stack[1:3])
+        # 按top分组
+        self.assertIn('C语言', stack[3:])
+        self.assertIn('算法数据结构', stack[3:])

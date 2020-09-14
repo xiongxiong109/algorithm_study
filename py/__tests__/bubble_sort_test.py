@@ -1,6 +1,6 @@
 # 测试冒泡排序
 import unittest
-from algorithm.bubble_sort import bubble_sort
+from algorithm.sort import bubble_sort
 
 
 class BubbleSortTest(unittest.TestCase):

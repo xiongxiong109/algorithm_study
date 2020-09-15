@@ -1,6 +1,6 @@
-# 测试冒泡排序
+# 测试排序算法
 import unittest
-from algorithm.sort import bubble_sort, selection_sort
+from algorithm.sort import bubble_sort, selection_sort, insertion_sort
 
 
 class TestSort(unittest.TestCase):
@@ -12,4 +12,10 @@ class TestSort(unittest.TestCase):
     def test_selection(self):
         test_list = [1, 3, 5, 6, 2, 0, 8]
         sorted_list = selection_sort(test_list)
+        self.assertEqual(sorted_list, [0, 1, 2, 3, 5, 6, 8])
+
+    def test_insertion(self):
+        test_list = [1, 3, 5, 6, 2, 0, 8]
+        sorted_list = insertion_sort(test_list)
+        # print(sorted_list)
         self.assertEqual(sorted_list, [0, 1, 2, 3, 5, 6, 8])

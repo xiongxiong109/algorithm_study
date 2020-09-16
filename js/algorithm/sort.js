@@ -43,6 +43,32 @@ function selectionSort(list) {
     return list
 }
 
+/**
+ * 插入排序
+ * 先拿到一个元素
+ * 与剩余元素依次做比较，如果待比较元素比当前元素小，则放到当前元素的左侧，后面的元素依次向后推移一位
+ * [7, 5, 9, 3, 1]
+ * curItem: 7
+ * inner: 1
+ * [7, 5]
+ * 5 < 7
+ * 所有元素依次往后推移
+ * list[0] = list[1] -> [5, 5]
+ * list[1] = curItem -> [5, 7]
+ */
+function insertionSort(list) {
+    for (let i = 1; i < list.length; i++) {
+        let temp = list[i]
+        let inner = i
+        while(inner > 0 && list[inner - 1] > temp) {
+            list[inner] = list[inner - 1]
+            inner--
+        }
+        list[inner] = temp
+    }
+    return list
+}
+
 // 交换列表中两个元素的位置的方法
 function swap(list, fromId, toId) {
     let temp = list[fromId]
@@ -52,5 +78,6 @@ function swap(list, fromId, toId) {
 
 module.exports = {
     bubbleSort,
-    selectionSort
+    selectionSort,
+    insertionSort
 }

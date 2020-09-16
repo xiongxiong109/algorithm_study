@@ -17,9 +17,30 @@ function bubbleSort(list) {
 
 /**
  * 选择排序
+ * 在未排序的数据中找到最小的元素， 放到起始位置
+ * 然后从剩余元素中继续找到最小的元素
+ * 比较这个最小元素与当前缓存的最小值，如果比缓存值小，则交换两者位置
  */
 function selectionSort(list) {
+    let minItem = null;
+    let minIdx = -1;
+    for (let outter = 0; outter < list.length; outter++) {
 
+        // 缓存最小值
+        minItem = list[outter]
+        minIdx = outter
+
+        for (let inner = outter; inner < list.length - 1; inner++) {
+            // 内层循环， 找到最小值
+            if (list[inner + 1] < minItem) {
+                minItem = list[inner + 1]
+                minIdx = inner + 1
+                // 交换当前最小值的位置
+                swap(list, outter, minIdx)
+            }
+        }
+    }
+    return list
 }
 
 // 交换列表中两个元素的位置的方法
@@ -30,5 +51,6 @@ function swap(list, fromId, toId) {
 }
 
 module.exports = {
-    bubbleSort
+    bubbleSort,
+    selectionSort
 }

@@ -94,11 +94,6 @@ function shellSort(list) {
     return list
 }
 
-// 动态间隔序列的希尔排序
-function dynamicShellSort(list) {
-    // empty
-}
-
 // 交换列表中两个元素的位置的方法
 function swap(list, fromId, toId) {
     let temp = list[fromId]

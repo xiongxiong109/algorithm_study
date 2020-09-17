@@ -60,6 +60,7 @@ function insertionSort(list) {
     for (let i = 1; i < list.length; i++) {
         let temp = list[i]
         let inner = i
+        // console.log(list)
         while(inner > 0 && list[inner - 1] > temp) {
             list[inner] = list[inner - 1]
             inner--
@@ -67,6 +68,35 @@ function insertionSort(list) {
         list[inner] = temp
     }
     return list
+}
+
+/**
+ * 希尔排序
+ * 是对标准插入排序的一个改进版本
+ * 使用一定的间隔序列，来减少循环的频次, 最终的增量会减到1, 就变成了标准的插入排序
+ */
+function shellSort(list) {
+    let gap = [5, 3, 1]
+    // 对不同间隔序列分组进行排序
+    for (let g = 0; g < gap.length; g++) {
+        // 内层实际仍然是插入排序
+        for (let outter = gap[g]; outter < list.length; outter++) {
+            let temp = list[outter]
+            let inner = outter
+            // console.log(list)
+            while (inner > 0 && list[inner - 1] > temp) {
+                list[inner] = list[inner - 1]
+                inner--
+            }
+            list[inner] = temp
+        }
+    }
+    return list
+}
+
+// 动态间隔序列的希尔排序
+function dynamicShellSort(list) {
+    // empty
 }
 
 // 交换列表中两个元素的位置的方法
@@ -79,5 +109,6 @@ function swap(list, fromId, toId) {
 module.exports = {
     bubbleSort,
     selectionSort,
-    insertionSort
+    insertionSort,
+    shellSort
 }

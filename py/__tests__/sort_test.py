@@ -38,8 +38,8 @@ class TestSort(unittest.TestCase):
         insertion_sort(test_list)
         self.assertEqual(sorted_list, test_list)
 
-    # def test_shell_sort(self):
-    #     test_list, sorted_list = create_random_list(100)
-    #     # 使用希尔排序
-    #     shell_sort(test_list)
-    #     # self.assertEqual(test_list, sorted_list)
+    def test_shell_sort(self):
+        test_list, sorted_list = create_random_list(100)
+        # 使用希尔排序
+        shell_sort(test_list)
+        self.assertEqual(test_list, sorted_list)

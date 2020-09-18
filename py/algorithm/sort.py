@@ -45,7 +45,16 @@ def shell_sort(sort_list):
 
     # 轮询使用这个gap_id为基数
     while gap_id >= 1:
-        print(gap_id)
+        # 标准插入排序
+        for outter in range(gap_id, len(sort_list)):
+            temp = sort_list[outter]
+            inner = outter
+            while inner > 0 and sort_list[inner - 1] >= temp:
+                # 比当前小的元素依次往前移动
+                sort_list[inner] = sort_list[inner - 1]
+                inner -= 1
+            sort_list[inner] = temp
+        # 一轮循环完成之后，更新动态序列的值
         gap_id = int((gap_id - 1) / 3)
 
 

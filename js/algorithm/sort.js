@@ -94,6 +94,51 @@ function shellSort(list) {
     return list
 }
 
+/**
+ * 归并排序
+ */
+function mergeSort(list) {
+    // 将数组拆分为左右两部分
+    const len = list.length;
+    if (len == 1) {
+        return list
+    }
+    const midLen = Math.floor(list.length / 2);
+    const leftArr = list.slice(0, midLen)
+    const rightArr = list.slice(midLen, list.length)
+    return merge(mergeSort(leftArr), mergeSort(rightArr))
+}
+
+function merge(leftArr, rightArr) {
+    let li = 0, ri = 0;
+    const rst = [];
+
+    // 两个数组归并
+    while(li < leftArr.length && ri < rightArr.length) {
+        if (leftArr[li] < rightArr[ri]) {
+            rst.push(leftArr[li]);
+            li++
+        } else {
+            rst.push(rightArr[ri]);
+            ri++
+        }
+    }
+
+    // 将余下的数组直接拼接合并
+    while(li < leftArr.length) {
+        rst.push(leftArr[li])
+        li++
+    }
+
+    while(ri < rightArr.length) {
+        rst.push(rightArr[ri])
+        ri++
+    }
+
+    return rst
+
+}
+
 // 交换列表中两个元素的位置的方法
 function swap(list, fromId, toId) {
     let temp = list[fromId]
@@ -105,5 +150,6 @@ module.exports = {
     bubbleSort,
     selectionSort,
     insertionSort,
-    shellSort
+    shellSort,
+    mergeSort
 }

@@ -1,3 +1,6 @@
+from math import floor
+
+
 # 冒泡排序, 两层循环，依次比较相邻元素
 def bubble_sort(sort_list):
     for idx in range(len(sort_list) - 1):
@@ -56,6 +59,47 @@ def shell_sort(sort_list):
             sort_list[inner] = temp
         # 一轮循环完成之后，更新动态序列的值
         gap_id = int((gap_id - 1) / 3)
+
+
+# 归并排序
+def merge_sort(sort_list):
+
+    list_len = len(sort_list)
+
+    if list_len == 1:
+        return sort_list
+
+    mid_idx = floor(list_len / 2)
+    left_list = sort_list[0:mid_idx]
+    right_list = sort_list[mid_idx:]
+
+    return merge(merge_sort(left_list), merge_sort(right_list))
+
+
+# 合并两个数组
+def merge(left_list, right_list):
+
+    ri = 0
+    li = 0
+    rst = []
+
+    while li < len(left_list) and ri < len(right_list):
+        if left_list[li] < right_list[ri]:
+            rst.append(left_list[li])
+            li += 1
+        else:
+            rst.append(right_list[ri])
+            ri += 1
+
+    while li < len(left_list):
+        rst.append(left_list[li])
+        li += 1
+
+    while ri < len(right_list):
+        rst.append(right_list[ri])
+        ri += 1
+
+    return rst
 
 
 # 工具方法，交换元素位置

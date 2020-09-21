@@ -1,7 +1,7 @@
 # 测试排序算法
 import unittest
 from random import randint
-from algorithm.sort import bubble_sort, selection_sort, insertion_sort, shell_sort
+from algorithm.sort import bubble_sort, selection_sort, insertion_sort, shell_sort, merge_sort
 
 
 # 创建随机数数组的函数
@@ -43,3 +43,9 @@ class TestSort(unittest.TestCase):
         # 使用希尔排序
         shell_sort(test_list)
         self.assertEqual(test_list, sorted_list)
+
+    def test_merge_sort(self):
+        test_list, sorted_list = create_random_list(100)
+        rst = merge_sort(test_list)
+        # print(rst)
+        self.assertEqual(rst, sorted_list)

@@ -1,7 +1,7 @@
 // 排序算法测试
 const { 
   bubbleSort, selectionSort,
-  insertionSort, shellSort, mergeSort
+  insertionSort, shellSort, mergeSort, mergeSortV2
 } = require('../algorithm/sort')
 
 describe('sort test', () => {
@@ -35,6 +35,12 @@ describe('sort test', () => {
   it('test mergeSort', () => {
     let list = [3, 5, 1, 7, 2, 4, 2, 8, 4, 0]
     const rst = mergeSort(list)
+    expect(rst).toEqual(list.sort())
+  })
+
+  it('test mergeSortV2', () => {
+    let list = [3, 5, 1, 7, 2, 4, 2, 8, 4, 0]
+    const rst = mergeSortV2(list)
     expect(rst).toEqual(list.sort())
   })
 

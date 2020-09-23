@@ -139,6 +139,75 @@ function merge(leftArr, rightArr) {
 
 }
 
+/**
+ * 使用非递归的方法实现归并排序
+ * （递归的实现对js而言太深了）
+ */
+function mergeSortV2(list) {
+    // 当迭代到只剩一个数组时，停止归并
+    if (list.length < 2) {
+        return
+    }
+    let step = 1;
+    let left, right;
+    while (step < list.length) {
+        left = 0;
+        right = step;
+        while (right + step <= list.length) {
+            mergeArrs(list, left, left + step, right, right + step)
+            left = right + step;
+            right = left + step;
+        }
+        if (right < list.length) {
+            mergeArrs(list, left, left + step, right, list.length)
+        }
+        // 递归法是每次二分，迭代法是每次乘二
+        step *= 2;
+    }
+    return list
+}
+
+/**
+ * 将数组的左右两段子数组合并
+ */
+function mergeArrs(list, startLeft, stopLeft, startRight, stopRight) {
+    // 初始化两个长度的数组, 多给了一个长度的空间，用于设置哨兵值
+    const leftArr = new Array(stopLeft - startLeft + 1);
+    const rightArr = new Array(stopRight - startRight + 1);
+
+    // 分别给左右数组赋值
+    let k = startRight;
+    for (let i = 0; i < rightArr.length; i++) {
+        rightArr[i] = list[k]
+        k++;        
+    }
+
+    k = startLeft;
+    for (let j = 0; j < leftArr.length; j++) {
+        leftArr[j] = list[k]
+        k++;
+    }
+
+    /**
+     * 给最后一个元素设置哨兵值Infinity
+     * Infinity 实际上就是无穷大的，所以一定比左边的元素大
+     */
+    rightArr[rightArr.length - 1] = Infinity;
+    leftArr[leftArr.length - 1] = Infinity;
+
+    // 对数组元素进行比较与交换
+    let m = 0, n = 0;
+    for (let i = startLeft; i < stopRight; i++) {
+        if (leftArr[m] < rightArr[n]) {
+            list[i] = leftArr[m]
+            m++
+        } else {
+            list[i] = rightArr[n]
+            n++
+        }
+    }
+}
+
 // 交换列表中两个元素的位置的方法
 function swap(list, fromId, toId) {
     let temp = list[fromId]
@@ -151,5 +220,6 @@ module.exports = {
     selectionSort,
     insertionSort,
     shellSort,
-    mergeSort
+    mergeSort,
+    mergeSortV2
 }

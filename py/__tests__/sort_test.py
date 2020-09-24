@@ -1,7 +1,11 @@
 # 测试排序算法
 import unittest
 from random import randint
-from algorithm.sort import bubble_sort, selection_sort, insertion_sort, shell_sort, merge_sort
+from algorithm.sort import (
+    bubble_sort, selection_sort,
+    insertion_sort, shell_sort, merge_sort
+)
+from algorithm.quick_sort import quick_sort
 
 
 # 创建随机数数组的函数
@@ -47,5 +51,11 @@ class TestSort(unittest.TestCase):
     def test_merge_sort(self):
         test_list, sorted_list = create_random_list(100)
         rst = merge_sort(test_list)
+        # print(rst)
+        self.assertEqual(rst, sorted_list)
+
+    def test_quick_sort(self):
+        test_list, sorted_list = create_random_list(100)
+        rst = quick_sort(test_list)
         # print(rst)
         self.assertEqual(rst, sorted_list)

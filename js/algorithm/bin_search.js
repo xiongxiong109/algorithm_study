@@ -5,6 +5,10 @@
 function binSearch(list, target) {
     let upperBound = list.length + 1;
     let lowerBound = 0;
+    // 当查找区间中没有该元素时，返回-1
+    if (target > list[list.length - 1] || target < list[0]) {
+        return -1
+    }
     while (lowerBound <= upperBound) {
         const mid = Math.floor((lowerBound + upperBound) / 2)
         if (list[mid] < target) {

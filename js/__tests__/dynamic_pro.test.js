@@ -30,5 +30,7 @@ describe('test dynamic', () => {
     it('test getDepth', () => {
         const dep = getDepth([1, [2, [3, [4]]], [5, 6], [7, 8], 9])
         expect(dep).toEqual(4)
+        const dep2 = getDepth([[1,2,3], [[[[[[[[[[[11]]]]]]]]]]]])
+        expect(dep2).toEqual(12)
     })
 })

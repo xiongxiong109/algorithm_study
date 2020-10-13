@@ -35,6 +35,7 @@ function dynamicFibonacci(n) {
  * 建立状态转移方程
  * 缓存并复用以往的结果
  * 按序从小到大计算
+ * 使用递归方法实现
  */
 function getDepth(arr) {
 
@@ -44,18 +45,18 @@ function getDepth(arr) {
         depArr[i] = 0
     }
 
-    _loopArr(arr)
-
-    function _loopArr(arList) {
-        for (let i = 0; i < arList.length; i++) {
-            _getDeep(arList[i], i)
+    for (let i = 0; i < arr.length; i++) {
+        if (arr[i] instanceof Array) {
+            _loopArr(arr[i], i)
         }
     }
 
-    function _getDeep(item, idx) {
-        if (item instanceof Array) {
-            depArr[idx]++
-            _loopArr(item, idx)
+    function _loopArr(list, idx) {
+        depArr[idx]++
+        for(let i = 0; i < list.length; i++) {
+            if (list[i] instanceof Array) {
+                _loopArr(list[i], idx)
+            }
         }
     }
 

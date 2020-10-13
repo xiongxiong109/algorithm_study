@@ -1,4 +1,7 @@
-const { fibonacci, dynamicFibonacci } = require('../algorithm/dynamic_pro')
+const {
+    fibonacci, dynamicFibonacci,
+    getDepth
+} = require('../algorithm/dynamic_pro')
 
 describe('test dynamic', () => {
     it('test not dynamic fibonacci', () => {
@@ -23,5 +26,9 @@ describe('test dynamic', () => {
         const disM = new Date().getTime() - mDate
         expect(fibn).toEqual(fibm)
         expect(disM).toBeLessThan(disN)
+    })
+    it('test getDepth', () => {
+        const dep = getDepth([1, [2, [3, [4]]], [5, 6], [7, 8], 9])
+        expect(dep).toEqual(4)
     })
 })

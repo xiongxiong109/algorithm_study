@@ -32,10 +32,23 @@ def dynamic_fibo(n):
 # 递归扁平化数组
 # 如: [1, [2, [3, 4], [5, 6]] => [1, 2, 3, 4, 5, 6]
 def flat_arr(arr):
-    pass
+    flatten = []
+    # 判断是否是list
+    _flat(arr, lambda item: flatten.append(item))
+    return flatten
+
+
+def _flat(arr, call):
+    for item in arr:
+        if type(item) == list:
+            _flat(item, call)
+        else:
+            call(item)
 
 
 # 求数组嵌套的最大深度
 # 如[1, [2, [3, [4], [5, 6], [7, 8, 9]] => depth: 4
 def get_depth(arr):
     pass
+
+

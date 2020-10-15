@@ -1,6 +1,7 @@
 import unittest
 from algorithm.dynamic_pro import (
-    fibonacci, dynamic_fibo
+    fibonacci, dynamic_fibo,
+    flat_arr
 )
 
 
@@ -16,3 +17,6 @@ class TestDynamicPro(unittest.TestCase):
         self.assertEqual(fib1, 1)
         fib4 = dynamic_fibo(4)
         self.assertEqual(fib4, 3)
+
+    def test_flat_arr(self):
+        self.assertEqual(flat_arr([1, [2, [3, 4], [5, 6]]]), [1, 2, 3, 4, 5, 6])

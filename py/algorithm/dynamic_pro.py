@@ -47,8 +47,22 @@ def _flat(arr, call):
 
 
 # 求数组嵌套的最大深度
-# 如[1, [2, [3, [4], [5, 6], [7, 8, 9]] => depth: 4
+# 如[1, [2, [3, [4]], [5, 6], [7, 8, 9]]] => depth: 4
+dep_arr = None
+
+
 def get_depth(arr):
-    pass
+    global dep_arr
+    dep_arr = [0] * len(arr)
+    for idx, item in enumerate(arr):
+        if type(item) == list:
+            _add_dep(item, idx)
+    return max(dep_arr) + 1
 
 
+def _add_dep(item, counter_idx):
+    global dep_arr
+    if type(item) == list:
+        dep_arr[counter_idx] += 1
+        for sub in item:
+            _add_dep(sub, counter_idx)

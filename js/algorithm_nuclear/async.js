@@ -45,4 +45,12 @@ function macroAndMicro() {
      */
 }
 
-macroAndMicro()
+// macroAndMicro()
+
+// 在连续多次请求的情况下，如何保证只使用最后一次请求的结果?
+/**
+ * 1. debounce and click 标志位
+ * 2. xhr abort
+ * 3. promise fetchAbort
+ * 4. push(callBack)
+ */

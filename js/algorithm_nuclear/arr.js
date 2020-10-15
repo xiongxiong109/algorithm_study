@@ -24,3 +24,11 @@ function getZeroLen() {
     console.log([len1, len2, len3, len4])
 }
 // getZeroLen()
+
+
+// 如何判断一个js对象是否是Array,arr为要判断的对象，其中最准确的方法是？
+/**
+ * tm竟然不是 arr instanceof Array
+ * 是什么 Object.prototype.toString.call()
+ * 说是在iframe场景下会失效...
+ */

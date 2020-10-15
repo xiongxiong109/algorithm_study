@@ -27,3 +27,15 @@ def dynamic_fibo(n):
     for item in range(2, n):
         fibo_arr[item] = fibo_arr[item - 1] + fibo_arr[item - 2]
     return fibo_arr[n - 1]
+
+
+# 递归扁平化数组
+# 如: [1, [2, [3, 4], [5, 6]] => [1, 2, 3, 4, 5, 6]
+def flat_arr(arr):
+    pass
+
+
+# 求数组嵌套的最大深度
+# 如[1, [2, [3, [4], [5, 6], [7, 8, 9]] => depth: 4
+def get_depth(arr):
+    pass

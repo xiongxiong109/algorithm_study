@@ -88,3 +88,33 @@ function getCrossArr(arr) {
 
     console.log(rst)
 }
+
+// 数组去重
+function uniqueArr(arr1, arr2) {
+    // 利用set union
+    // return [...new Set([...arr1, ...arr2])]
+    // 利用对象下标
+    const rst = {}
+    const arr = [...arr1, ...arr2]
+    arr.map(item => {
+        if (!rst[item]) {
+            rst[item] = item
+        }
+    })
+    return Object.values(rst).sort()
+}
+
+// 数组求交集
+function insectionArr(arr1, arr2) {
+    // 利用数组方法, 和set的has方法, 来处理交集
+    // const setA = new Set(arr1)
+    // const setB = new Set(arr2)
+    // const rst = arr1.filter(item => setB.has(item))
+    // return rst
+    const rst = arr1.filter(item => arr2.includes(item))
+    return rst
+}
+
+// const arr = uniqueArr([1, 2, 3], [2, 3, 4])
+// const arr = insectionArr([1,2,3], [3, 2, 4, 5])
+// console.log(arr)

@@ -11,4 +11,15 @@
   * 但是这个地方, 用到了document.write, 所以答案不是一个数组, 而是"e"...
   */
 
-  
+// 短横线命名改为驼峰命名
+function renameStr(str) {
+    let strArr = str.split('-')
+    for (let i = 0; i < strArr.length; i++) {
+        const item = strArr[i]
+        strArr[i] = item[0].toUpperCase() + item.substring(1)
+    }
+    return strArr.join('')
+}
+
+const formatted = renameStr('kuai-shou-front-end')
+console.log(formatted)

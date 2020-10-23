@@ -118,3 +118,42 @@ function insectionArr(arr1, arr2) {
 // const arr = uniqueArr([1, 2, 3], [2, 3, 4])
 // const arr = insectionArr([1,2,3], [3, 2, 4, 5])
 // console.log(arr)
+
+// 提交数组比较: 提交过来的数组中，不能有大类与小类的包含 如 [3200, 3201]
+// 提交数组整体与已保存数组的比较，提交的数组不能与已保存的数组有大小类包含的关系，如 [3200] diff [3201]
+
+// 首先要有一个方法，用于比较两个元素之间是否有大小类包含的关系
+function isCrossed(itemA, itemB) {
+    // 假设业务逻辑是比较前两位数
+    if (parseInt(itemA / 100) == parseInt(itemB / 100)) {
+        return true
+    }
+    return false
+}
+// 检查一个数组自身元素之间有没有存在大小类包含
+function checkArrCross(list) {
+    // 可以对数组先做一次排序，
+    // 这样数组的先后顺序一定是 [3200, 3201, 4200, 4201] 这种的
+    // 只需要比较相邻两个元素isCrossed即可
+    list = list.sort((a, b) => a - b);
+    for (let i = 0; i < list.length - 1; i++) {
+        if (isCrossed(list[i], list[i + 1])) {
+            return false
+        }
+    }
+    return true
+}
+
+// 检查两个数组之间有没有存在大小类包含关系，实际就是看两个数组合并在一起之后是否能通过checkArrCross
+function checkArr(funcType, reFuncType) {
+    if (checkArrCross(funcType)) { // 先只校验传入值
+        // 传入值正确的话，再校验两个数组的合并值
+        return  checkArrCross([...funcType, ...reFuncType])
+    }
+    // 否则校验失败
+    return false
+}
+
+module.exports = {
+    checkArr
+}

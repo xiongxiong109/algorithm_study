@@ -31,21 +31,22 @@ function zeepLoop(arr) {
     let nextDirec = getNextDirection();
     let nextStep = getNextStep(nextDirec, row, col, arrGraph)
 
-    while(Math.abs(nextStep.row) || Math.abs(nextStep.col) || nextStep.needChange) {
+    while (Math.abs(nextStep.row) || Math.abs(nextStep.col) || nextStep.needChange) {
         // 开始遍历
-        if (arrGraph[nextStep.row][nextStep.col]) {
-            if (!arrGraph[nextStep.row][nextStep.col].isVisited) { // 如果还没有访问过, 存入数组
-                arrGraph[nextStep.row][nextStep.col].isVisited = true;
-                rstArr.push(arrGraph[nextStep.row][nextStep.col].value)
-            }
+        if (!arrGraph[nextStep.row][nextStep.col].isVisited) { // 如果还没有访问过, 存入数组
+            arrGraph[nextStep.row][nextStep.col].isVisited = true;
+            rstArr.push(arrGraph[nextStep.row][nextStep.col].value)
         }
         nextStep = getNextStep(nextDirec, nextStep.row, nextStep.col, arrGraph);
+        
         // 需要改变回路方向了
         if (nextStep.needChange) {
+            arrGraph[nextStep.row][nextStep.col].isVisited = true;
+            rstArr.push(arrGraph[nextStep.row][nextStep.col].value)
             nextDirec = getNextDirection(nextDirec)
-            console.log(nextStep)
             nextStep = getNextStep(nextDirec, nextStep.row, nextStep.col, arrGraph);
         }
+
     }
     console.log(rstArr)
 }
@@ -72,7 +73,7 @@ function getNextStep(curDirect, row, col, arrGraph) {
 
     // let curItem = arrGraph[row][col];
     let stepRow = 0, stepCol = 0;
-    
+
     switch (curDirect) {
         // 向右移动一格
         case 'toRight':
@@ -97,17 +98,19 @@ function getNextStep(curDirect, row, col, arrGraph) {
         nextRow < 0 || // 小于边界
         nextRow >= arrGraph.length || // 大于边界
         nextCol < 0 ||
-        nextCol >= arrGraph.length
+        nextCol >= arrGraph.length ||
+        arrGraph[nextRow][nextCol].isVisited
     ) {
+        // 已经碰壁, 尝试获取下一阶段的路径
         const nextDire = getNextDirection(curDirect);
         const nextStep = getNextStep(nextDire, row, col, arrGraph);
-        const needChange = !arrGraph[nextStep.row][nextStep.col].isVisited;
-        if (needChange) {
+        if (nextStep.row >= 0 && nextStep.col >= 0 && !arrGraph[nextStep.row][nextStep.col].isVisited) {
             return {
                 ...nextStep,
-                needChange
+                needChange: true
             }
         }
+
         // 表示循环完结
         return {
             row: 0,
@@ -119,7 +122,7 @@ function getNextStep(curDirect, row, col, arrGraph) {
         row: nextRow,
         col: nextCol
     }
-    
+
 }
 
-zeepLoop([[1, 2, 3, 4],[12, 13, 14, 5],[11, 16, 15, 6],[10, 9,  8,  7]])
+zeepLoop([[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]])

@@ -1,4 +1,4 @@
-const deepClone = require('../algorithm_nuclear/deepClone')
+const deepClone = require('../algorithm_nuclear/deep_clone')
 
 describe('Test DeepClone', () => {
     it('test', () => {

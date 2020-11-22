@@ -53,7 +53,7 @@ function getDepth(arr) {
 
     function _loopArr(list, idx) {
         depArr[idx]++
-        for(let i = 0; i < list.length; i++) {
+        for (let i = 0; i < list.length; i++) {
             if (list[i] instanceof Array) {
                 _loopArr(list[i], idx)
             }
@@ -63,8 +63,35 @@ function getDepth(arr) {
     return Math.max.apply(null, depArr) + 1
 }
 
+// 尝试用非递归的方式实现(stack)
+function getDepthByStack(arr) {
+    const deepRow = [];
+    // 初始化存储deepRow的数组, 用于计算每一个元素的数组深度
+    arr.forEach(() => {
+        deepRow.push(0);
+    })
+
+    // 模拟递归用的堆栈
+    let loopStack = [];
+    for (let i = 0; i < arr.length; i++) {
+        loopStack.push(arr[i])
+        while (loopStack.length) {
+            const curItem = loopStack.pop();
+            if (curItem instanceof Array) {
+                deepRow[i]++
+            }
+            for (let j = 0; j < curItem.length; j++) {
+                loopStack.push(curItem[j]);
+            }
+        }
+    }
+
+    return Math.max.apply(null, deepRow) + 1
+}
+
 module.exports = {
     fibonacci,
     dynamicFibonacci,
-    getDepth
+    getDepth,
+    getDepthByStack
 }

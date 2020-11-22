@@ -1,6 +1,6 @@
 const {
     fibonacci, dynamicFibonacci,
-    getDepth
+    getDepth, getDepthByStack
 } = require('../algorithm/dynamic_pro')
 
 describe('test dynamic', () => {
@@ -31,6 +31,12 @@ describe('test dynamic', () => {
         const dep = getDepth([1, [2, [3, [4]]], [5, 6], [7, 8], 9])
         expect(dep).toEqual(4)
         const dep2 = getDepth([[1,2,3], [[[[[[[[[[[11]]]]]]]]]]]])
+        expect(dep2).toEqual(12)
+    })
+    it('test getDepthByStack', () => {
+        const dep = getDepthByStack([1, [2, [3, [4]]], [5, 6], [7, 8], 9])
+        expect(dep).toEqual(4)
+        const dep2 = getDepthByStack([[1,2,3], [[[[[[[[[[[11]]]]]]]]]]]])
         expect(dep2).toEqual(12)
     })
 })

@@ -24,28 +24,25 @@ function calc(str) {
         }
     }
 
-    // console.log(numStack)
-    // console.log(operStack)
-
     function _calc() {
         const num1 = numStack.pop();
-            const num2 = numStack.pop();
-            const oper = operStack.pop();
-            switch (oper) {
-                case 'x':
-                case '*':
-                    numStack.push(num2 * num1);
-                    break;
-                case '+':
-                    numStack.push(num2 + num1);
-                    break;
-                case '-':
-                    numStack.push(num2 - num1);
-                    break;
-                case '/':
-                    numStack.push(num2 / num1);
-                    break;
-            }
+        const num2 = numStack.pop();
+        const oper = operStack.pop();
+        switch (oper) {
+            case 'x':
+            case '*':
+                numStack.push(num2 * num1);
+                break;
+            case '+':
+                numStack.push(num2 + num1);
+                break;
+            case '-':
+                numStack.push(num2 - num1);
+                break;
+            case '/':
+                numStack.push(num2 / num1);
+                break;
+        }
     }
 
     while (operStack.length) {

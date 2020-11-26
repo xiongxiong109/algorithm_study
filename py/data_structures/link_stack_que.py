@@ -71,22 +71,3 @@ class LinkList:
             self.last.prev = cur_node.prev
             return cur_node
 
-
-# if __name__ == "__main__":
-    # link_stack = LinkList()
-    # link_stack.push('aaa')
-    # link_stack.push('sdsdsd')
-    # link_stack.push('baababa')
-    # link_stack.pop()
-    # link_stack.pop()
-    # link_stack.pop()
-    # link_stack.pop()
-    # rst = link_stack.show_stack()
-    # link_stack.put('aa')
-    # link_stack.put('sas')
-    # link_stack.put('fgdfg')
-    # print(link_stack.get().item)
-    # print(link_stack.get().item)
-    # print(link_stack.get().item)
-    # print(link_stack.get().item)
-    # print(rst)

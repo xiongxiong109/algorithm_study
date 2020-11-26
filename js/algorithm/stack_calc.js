@@ -7,21 +7,40 @@
  * 数字入数字栈
  * 操作符入操作符栈
  * 遇到 ) 时，弹出 一个操作符与两个操作数，计算结果重新入数字栈
- * 这个算法有点问题。。。
+ * 因为整个计算都是依赖)的，整个算式需要用一个额外的大括号包裹， 用于触发一次_calc
  */
 function calc(str) {
+    // 字符串添加额外的大括号
+    str = /^\(.*\)$/.test(str) ? str : `(${str})`;
+
     const numStack = [], operStack = [];
 
     for (let i = 0; i < str.length; i++) {
+
+        // 这里也只考虑了个位数
         if (/\d/.test(str[i])) {
             numStack.push(parseInt(str[i]))
         }
+
         if (/\+|\-|\*|x|\//.test(str[i])) {
             operStack.push(str[i])
         }
+
+        // console.log('计算前')
+        // console.log(numStack)
+        // console.log(operStack)
         if (/\)/.test(str[i])) {
+            // console.log(')')
             _calc()
+            const lastOper = operStack[operStack.length - 1];
+            if (/x|\*|\//.test(lastOper)) { // 乘除计算拥有更高的优先级, 需要额外再算一次
+                _calc();
+            }
+            // console.log('计算后')
+            // console.log(numStack)
+            // console.log(operStack)
         }
+
     }
 
     function _calc() {
@@ -45,11 +64,11 @@ function calc(str) {
         }
     }
 
-    while (operStack.length) {
-        _calc();
-    }
     return numStack.pop();
 }
 
-const rst = calc("1+((2+3)*(4*5))")
-console.log(rst)
+// const rst = calc("(2*(1+4/(1+1))-5)")
+// const rst = calc("1+((2+3)*(4*5)")
+// console.log(rst)
+
+module.exports = calc

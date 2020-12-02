@@ -20,8 +20,10 @@ function reduce(collection, iteratorFn, init) {
     return rst
 }
 
-const rst = reduce([1, 2, 3], (sum, n) => {
-    return sum + n;
-}, 10)
+// const rst = reduce([1, 2, 3], (sum, n) => {
+//     return sum + n;
+// }, 10)
 
-console.log(rst)
+// console.log(rst)
+
+module.exports = reduce

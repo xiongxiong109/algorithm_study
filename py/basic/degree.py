@@ -3,6 +3,7 @@
 
 
 # 可以使用input获取用户输入, float转换数据类型
+# try except捕获特定类型的报错
 def trans_degree(num):
     try:
         c_degree = (float(num) - 32) / 1.8

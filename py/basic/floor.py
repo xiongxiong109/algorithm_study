@@ -22,5 +22,17 @@ def floor():
     return rst
 
 
+# 反转正整数
+def reverse_num(num):
+    rst = 0
+    while num > 0:
+        temp_num = num % 10
+        rst = rst * 10 + temp_num
+        # 用于loop循环
+        num //= 10
+    return rst
+
+
 if __name__ == "__main__":
-    print(floor())
+    # print(floor())
+    print(reverse_num(123456))

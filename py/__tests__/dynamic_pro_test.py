@@ -1,7 +1,7 @@
 import unittest
 from algorithm.dynamic_pro import (
     fibonacci, dynamic_fibo,
-    flat_arr, get_depth
+    flat_arr, get_depth, yield_fibo
 )
 
 
@@ -17,6 +17,15 @@ class TestDynamicPro(unittest.TestCase):
         self.assertEqual(fib1, 1)
         fib4 = dynamic_fibo(4)
         self.assertEqual(fib4, 3)
+
+    def test_yield_fibo(self):
+        fib1 = dynamic_fibo(20)
+        # generator函数返回的是一个iterator object
+        fib2_info = yield_fibo(20)
+        fib2 = 0
+        for n in fib2_info:
+            fib2 = n
+        self.assertEqual(fib1, fib2)
 
     def test_flat_arr(self):
         self.assertEqual(flat_arr([1, [2, [3, 4], [5, 6]]]), [1, 2, 3, 4, 5, 6])

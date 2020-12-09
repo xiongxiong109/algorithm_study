@@ -29,6 +29,17 @@ def dynamic_fibo(n):
     return fibo_arr[n - 1]
 
 
+# 充分利用语言特性，使用yield实现
+# yield 会把普通函数变成一个generator函数(与js类似, 只是js需要用 * 显式声明 generator)
+# 这个函数是需要执行的
+def yield_fibo(n):
+    # 写法也专业起来了, 开始解构初始化值了，飘了
+    a, b = 0, 1
+    for item in range(n):
+        a, b = b, a + b
+        yield a
+
+
 # 递归扁平化数组
 # 如: [1, [2, [3, 4], [5, 6]]] => [1, 2, 3, 4, 5, 6]
 def flat_arr(arr):

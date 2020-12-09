@@ -57,6 +57,33 @@ def _flat(arr, call):
             call(item)
 
 
+# 非递归方式扁平化实现(stack)
+def flat_arr_stack(arr):
+    rst_arr = []
+    loop_stack = []
+
+    for item in arr:
+
+        if isinstance(item, list):
+            # 元素入栈
+            loop_stack.append(item)
+        else:
+            rst_arr.append(item)
+
+        while len(loop_stack):
+            target_item = loop_stack.pop()
+            if isinstance(target_item, list):
+                # loop_stack: [2, [3, [4]]]
+                for sub_item in target_item:
+                    # 2, [3 [4]], append会影响先后顺序
+                    # loop_stack.append(sub_item)
+                    loop_stack.insert(0, sub_item)
+            else:
+                rst_arr.append(target_item)
+
+    return rst_arr
+
+
 # 求数组嵌套的最大深度
 # 如[1, [2, [3, [4]], [5, 6], [7, 8, 9]]] => depth: 4
 dep_arr = None

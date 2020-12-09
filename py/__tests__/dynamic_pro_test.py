@@ -1,7 +1,8 @@
 import unittest
 from algorithm.dynamic_pro import (
-    fibonacci, dynamic_fibo,
-    flat_arr, get_depth, yield_fibo
+    fibonacci, dynamic_fibo, yield_fibo,
+    flat_arr, flat_arr_stack,
+    get_depth
 )
 
 
@@ -29,6 +30,10 @@ class TestDynamicPro(unittest.TestCase):
 
     def test_flat_arr(self):
         self.assertEqual(flat_arr([1, [2, [3, 4], [5, 6]]]), [1, 2, 3, 4, 5, 6])
+
+    def test_flat_arr_stack(self):
+        self.assertEqual([1, 2, 3, 4, 5, 6], flat_arr_stack([1, [2, [3, 4], [5, 6]]]))
+        self.assertEqual(flat_arr_stack([[1, 2], 3, [4, [5, [6]]]]), [1, 2, 3, 4, 5, 6])
 
     def test_get_depth(self):
         self.assertEqual(get_depth([1, [2, [3, [4]]], [5, 6], [7, 8], 9]), 4)

@@ -16,10 +16,11 @@ f''
 
 
 # 短横线命名转驼峰
-def x2camel(val_nm):
-    pass
-
-
-if __name__ == "__main__":
-    greet = 'morning'
-    print(f'hello, {greet}')
+def x2camel(val_nm=''):
+    # 数组切割方法
+    val_nm = val_nm.rsplit('-')
+    val_str = ''
+    for item in val_nm:
+        # title可以直接返回一个首字母大写的字符串
+        val_str += item.title()
+    return val_str

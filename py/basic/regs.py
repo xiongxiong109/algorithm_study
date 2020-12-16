@@ -30,19 +30,19 @@ import re
 #     rst = re.match(reg, 'dancing balabala')
 #     print(rst)
 
+# 跟js的 str.replace一样，第二个参数可以传递函数, 通过返回对应参数实现模板替换
+def handle_reg(rst, data):
+    # group, 类似 js的 $1
+    # print(rst.group())
+    key = rst.group(1)
+    return data[key] or ''
+
+
 # 实现模板字符串替换
 def format_str(origin_str='', data=None):
-
-    # 跟js的 str.replace一样，第二个参数可以传递函数, 通过返回对应参数实现模板替换
-    def handle_reg(rst):
-        # group, 类似 js的 $1
-        # print(rst.group())
-        key = rst.group(1)
-        return data[key] or ''
-
     reg = r'\{(\w+)\}'
     # 使用sub进行替换
-    after_str = re.sub(reg, handle_reg, origin_str, flags=re.I | re.M)
+    after_str = re.sub(reg, lambda rst: handle_reg(rst, data), origin_str, flags=re.I | re.M)
 
     return after_str
 

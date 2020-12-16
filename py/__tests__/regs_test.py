@@ -4,7 +4,7 @@ from basic.regs import format_str
 
 class TestRegs(unittest.TestCase):
     def test_format_str(self):
-        
+
         origin_str = 'hello, {language}, I am {name}, I {favior} {language}'
 
         data = {

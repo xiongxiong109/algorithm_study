@@ -1,5 +1,5 @@
 """
-多线程编程, 大多数后端语言都会有的机制
+多进程编程, 大多数后端语言都会有的机制
 """
 from multiprocessing import (
     Process
@@ -26,7 +26,7 @@ def download_file(url):
     host_file_nm = matched.group(1)
 
     # mock delay
-    sleep(3)
+    # sleep(.3)
     # 写文件
     with open('./__temp/t_{0}.html'.format(host_file_nm), 'w', encoding='utf-8') as f:
         f.write(rst.text)
@@ -51,7 +51,9 @@ if __name__ == '__main__':
     # for item in urls:
     #     download_file(item)
 
-    # 开启多线程 三个任务并行执行 3000ms
+    # 开启多个进程 三个任务并行执行 3000ms
+    # 启动多个进程也是需要消耗时间的(join方法), 所以需要看下问题的规模
+    # 在某些极快（比如300ms）的处理范围内，可能不需要多个进程, 多个进程反而会增加成本
     process_arr = []
 
     for item in urls:

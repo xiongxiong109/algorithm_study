@@ -1,6 +1,7 @@
 """
 Thread 的常规用法与Process用法类似,
 另外可以通过继承实现自定义的线程类
+多线程可以共享进程的内存空间
 """
 from threading import Thread
 import requests
@@ -11,10 +12,10 @@ import re
 # 记录函数执行时间的logger, decorator
 def logger(func):
     def wrapper_funcs(*kwargs):
-        start = time()
+        log_start = time()
         func(*kwargs)
-        end = time()
-        dis_time = (end - start) * 1000
+        log_end = time()
+        dis_time = (log_start - log_end) * 1000
         print('task takes %.2f ms' % dis_time)
 
     return wrapper_funcs

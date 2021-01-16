@@ -23,9 +23,9 @@ def logger(func):
 
 # start, join, etc
 class DownloadTask(Thread):
-    def __init__(self, url):
+    def __init__(self, download_url):
         super().__init__()
-        self.url = url
+        self.url = download_url
         self.host_reg = r'^http[s]?://\w+\.(\w+)\.\w+'
 
     # 重写Tread类的run方法
